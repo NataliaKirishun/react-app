@@ -48,8 +48,7 @@ const Search = ({searchBy, inputChangeHandler, toggleSearchBy,formSubmitHandler}
 export default Search;
 
 const Header = styled.header`
-  width: 100vw;
-  height: auto;    
+  flex: 0 0 auto;    
   background-color: ${Theme.colors.dark_grey};
   background-image: url(${bckgImage});
   background-repeat: no-repeat;

@@ -3,11 +3,11 @@ import styled, {css} from 'styled-components'
 import RadioButton from '../../common/Components/RadioButton'
 import Theme from '../../common/Theme/Theme'
 
-const Cockpit = ({sortBy, toggleSortBy}) => {
+const Cockpit = ({sortBy, toggleSortBy, filmsCount}) => {
     return (
         <Background>
             <Wrapper>
-                <span>7 movies found</span>
+                <span>{filmsCount} movies found</span>
                 <form>
                     <span>Sort by</span>
                     <RadioButton
@@ -32,7 +32,7 @@ const Cockpit = ({sortBy, toggleSortBy}) => {
 
 export default Cockpit;
 
-const Background = styled.div`
+const Background = styled.div` 
     width: 100%;
     background-color: ${Theme.colors.grey};    
 `;
