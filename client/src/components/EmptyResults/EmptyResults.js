@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import Theme from '../../common/Theme/Theme'
 
-const EmptyResults = () => (
+const EmptyResults = ({text}) => (
     <EmptyBackground>
         <EmptyContainer>
-            <EmptyText>Please, select your desired film...</EmptyText>
+            <EmptyText>{text}</EmptyText>
         </EmptyContainer>
     </EmptyBackground>
 );

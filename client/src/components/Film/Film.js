@@ -6,7 +6,7 @@ const Film = ({info, albumClickHandler}) => (
         <Img src={info.poster_path}/>
         <InfoWrapper>
             <Title>{info.title}</Title>
-            <FilmGenre>{info.genres.join(', ')}</FilmGenre>
+            <span>{info.genres.join(', ')}</span>
             <FilmYearRelease>{info.release_date.split('-')[0]}</FilmYearRelease>
         </InfoWrapper>
     </FilmLink>
@@ -56,10 +56,6 @@ const Title = styled.h3`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-`;
-
-const FilmGenre = styled.span`
-
 `;
 
 const FilmYearRelease = styled.span`

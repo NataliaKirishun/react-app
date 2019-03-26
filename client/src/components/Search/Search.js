@@ -4,12 +4,13 @@ import Logo from "../../common/Components/Logo"
 import RadioButton from "../../common/Components/RadioButton"
 import Button from "../../common/Components/Button"
 import Theme from '../../common/Theme/Theme'
-import bckgImage from '../../assets/images/films.jpeg'
+import HeaderBackground from '../../common/Components/HeaderBackground'
+import HeaderWrapper from '../../common/Components/HeaderWrapper'
 
 const Search = ({searchBy, inputChangeHandler, toggleSearchBy,formSubmitHandler}) => {
     return (
-        <Header>
-            <Wrapper>
+        <HeaderBackground>
+            <HeaderWrapper>
                 <Logo/>
                 <Title main>find your movie</Title>
                 <Form onSubmit={formSubmitHandler}>
@@ -40,25 +41,14 @@ const Search = ({searchBy, inputChangeHandler, toggleSearchBy,formSubmitHandler}
                         <Button type="submit" red>search</Button>
                     </SearchWrapper>
                 </Form>
-            </Wrapper>
-        </Header>
+            </HeaderWrapper>
+        </HeaderBackground>
     )
 };
 
 export default Search;
 
-const Header = styled.header`
-  flex: 0 0 auto;    
-  background-color: ${Theme.colors.dark_grey};
-  background-image: url(${bckgImage});
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-`;
-const Wrapper = styled.div`
-    width: 80%;
-    margin: 0 auto;
-    padding: 10px 0 20px;
-`;
+
 
 const Title = styled.h2`
     color: ${Theme.colors.white};    

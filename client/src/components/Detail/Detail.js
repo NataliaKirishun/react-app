@@ -3,12 +3,13 @@ import styled, {css} from 'styled-components'
 import Theme from '../../common/Theme/Theme'
 import Logo from '../../common/Components/Logo'
 import Button from '../../common/Components/Button'
-import bckgImage from '../../assets/images/films.jpeg'
+import HeaderBackground from '../../common/Components/HeaderBackground'
+import HeaderWrapper from '../../common/Components/HeaderWrapper'
 
 const Detail =  ({targetFilm, searchButtonHandler}) => {
     return(
-    <DetailBackground>
-        <DetailWrapper>
+    <HeaderBackground>
+        <HeaderWrapper>
             <Container>
                 <Logo/>
                 <Button onClick={()=>searchButtonHandler()} white>Search</Button>
@@ -27,24 +28,11 @@ const Detail =  ({targetFilm, searchButtonHandler}) => {
                     <Info>{targetFilm.overview}</Info>
                 </InfoWrapper>
             </Container>
-        </DetailWrapper>
-    </DetailBackground>
+        </HeaderWrapper>
+    </HeaderBackground>
 )};
 
 export default  Detail;
-
-const DetailBackground = styled.div`
-    width: 100%;    
-    background: url(${bckgImage}) no-repeat;
-    background-color: ${Theme.colors.dark_grey};
-    background-blend-mode: overlay;    
-`;
-
-const DetailWrapper = styled.div`
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px 0;
-`;
 
 const Container = styled.div`
     display: flex;

@@ -45,12 +45,4 @@ const Wrapper = styled.div`
     padding: 10px 0;
 `;
 
-const SortLabel = styled.label`
-    cursor: pointer;
-    margin-left: 20px;
-    
-    ${props => props.active && css`
-        color: ${Theme.colors.red};  
-    `}
-`;
 

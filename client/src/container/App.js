@@ -6,6 +6,7 @@ import EmptyResults from '../components/EmptyResults/EmptyResults'
 import Films from '../components/Films/Films'
 import Detail from '../components/Detail/Detail'
 import Footer from '../components/Footer/Footer'
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary'
 import mock from "../mock.json"
 
 
@@ -92,11 +93,6 @@ class App extends Component {
         let targetFilm = this.state.allFilms.filter((film) => {
             return film.id === id
         })[0];
-        let sameGenreFilms = this.state.allFilms.filter((film)=>{
-            film.genres.some((genre)=>{
-                return targetFilm.genres.indexOf(genre)>-1
-            })
-        });
 
         this.setState({
             activeAlbumId: id,
@@ -104,7 +100,7 @@ class App extends Component {
         })
     }
 
-    searchButtonHandler(){
+    searchButtonHandler() {
         this.setState({
             activeAlbumId: null,
             activeFilm: null
@@ -115,11 +111,20 @@ class App extends Component {
     render() {
         return (
             <AppWrapper>
-                <Search
-                    searchBy={this.state.searchBy}
-                    inputChangeHandler={this.inputChangeHandler}
-                    toggleSearchBy={this.toggleSearchBy}
-                    formSubmitHandler={this.formSubmitHandler}/>
+                <ErrorBoundary>
+                    <Header>
+                        {this.state.activeAlbumId ?
+                            <Detail
+                                targetFilm={this.state.activeFilm}
+                                searchButtonHandler={this.searchButtonHandler}/>
+                            : <Search
+                                searchBy={this.state.searchBy}
+                                inputChangeHandler={this.inputChangeHandler}
+                                toggleSearchBy={this.toggleSearchBy}
+                                formSubmitHandler={this.formSubmitHandler}/>
+                        }
+                    </Header>
+                </ErrorBoundary>
                 <Main>
                     <Cockpit
                         sortBy={this.state.sortBy}
@@ -130,15 +135,9 @@ class App extends Component {
                             <Films
                                 films={this.state.allFilms}
                                 albumClickHandler={this.albumClickHandler}/> :
-                            <EmptyResults/> :
-                        null
+                            <EmptyResults text='No films found for this request...'/> :
+                        <EmptyResults text='Please, select your desired film.. '> </EmptyResults>
                     }
-                    {this.state.activeAlbumId ?
-                        <Fragment>
-                            <Detail targetFilm={this.state.activeFilm} searchButtonHandler={this.searchButtonHandler}/>
-                            <Films films={this.state.someGenreFilms}/>
-                        </Fragment>
-                        : null}
                 </Main>
                 <Footer/>
             </AppWrapper>
@@ -155,7 +154,10 @@ const AppWrapper = styled.div`
     flex-direction: column;
 `;
 
+const Header = styled.header`
+    flex: 0 0 auto;    
+`;
+
 const Main = styled.main`
-    flex: 1 0 auto;
-    
+    flex: 1 0 auto;    
 `;
