@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, {css} from 'styled-components'
-import Theme from '../../common/Theme/Theme'
 
 const Film = ({info, albumClickHandler}) => (
     <FilmLink onClick={()=>albumClickHandler(info.id)}>

@@ -37,7 +37,7 @@ const Search = ({searchBy, inputChangeHandler, toggleSearchBy,formSubmitHandler}
                             filtered={searchBy}
                             handlerChange={toggleSearchBy}
                             colored/>
-                        <Button type="submit">search</Button>
+                        <Button type="submit" red>search</Button>
                     </SearchWrapper>
                 </Form>
             </Wrapper>

@@ -19,7 +19,9 @@ class App extends Component {
             sortBy: 'release date',
             searched: false,
             allFilms: [],
-            activeAlbumId: null
+            activeAlbumId: null,
+            activeFilm: null,
+            someGenreFilms: []
 
         };
         this.toggleSearchBy = this.toggleSearchBy.bind(this);
@@ -28,6 +30,7 @@ class App extends Component {
         this.toggleSortBy = this.toggleSortBy.bind(this);
         this.searchFilms = this.searchFilms.bind(this);
         this.albumClickHandler = this.albumClickHandler.bind(this);
+        this.searchButtonHandler = this.searchButtonHandler.bind(this);
     }
 
     toggleSearchBy(e) {
@@ -86,9 +89,27 @@ class App extends Component {
     }
 
     albumClickHandler(id) {
+        let targetFilm = this.state.allFilms.filter((film) => {
+            return film.id === id
+        })[0];
+        let sameGenreFilms = this.state.allFilms.filter((film)=>{
+            film.genres.some((genre)=>{
+                return targetFilm.genres.indexOf(genre)>-1
+            })
+        });
+
         this.setState({
-            activeAlbumId:id
+            activeAlbumId: id,
+            activeFilm: targetFilm
         })
+    }
+
+    searchButtonHandler(){
+        this.setState({
+            activeAlbumId: null,
+            activeFilm: null
+        });
+
     }
 
     render() {
@@ -112,7 +133,12 @@ class App extends Component {
                             <EmptyResults/> :
                         null
                     }
-                    <Detail/>
+                    {this.state.activeAlbumId ?
+                        <Fragment>
+                            <Detail targetFilm={this.state.activeFilm} searchButtonHandler={this.searchButtonHandler}/>
+                            <Films films={this.state.someGenreFilms}/>
+                        </Fragment>
+                        : null}
                 </Main>
                 <Footer/>
             </AppWrapper>
