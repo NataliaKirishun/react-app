@@ -2,7 +2,7 @@ import React from 'react'
 import styled, {css} from 'styled-components'
 
 const Film = ({info, albumClickHandler}) => (
-    <FilmLink onClick={()=>albumClickHandler(info.id)}>
+    <FilmLink onClick={() => albumClickHandler(info.id)}>
         <Img src={info.poster_path}/>
         <InfoWrapper>
             <Title>{info.title}</Title>
@@ -21,8 +21,17 @@ const FilmLink = styled.a`
     padding-top: 55%;
     text-decoration: none;
     box-shadow: 0 4px 11px 0 grey;
-    margin-bottom: 30px;
-    
+    margin-bottom: 30px;  
+      
+  @media (max-width: 900px) {
+    width: 48%;
+    padding-top: 88%;
+  }
+  
+  @media (max-width: 500px) {
+    width: 100%;
+    padding-top: 183%;
+  }    
 `;
 
 const Img = styled.img`

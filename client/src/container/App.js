@@ -105,7 +105,6 @@ class App extends Component {
             activeAlbumId: null,
             activeFilm: null
         });
-
     }
 
     render() {
