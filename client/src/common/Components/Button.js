@@ -1,6 +1,5 @@
-import React from "react"
-import styled, { css } from "styled-components"
-import Theme from "../Theme/Theme"
+import styled, { css } from 'styled-components';
+import Theme from '../Theme/Theme';
 
 const Button = styled.button`
     font-size: 16px;

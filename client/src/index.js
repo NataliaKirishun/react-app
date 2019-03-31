@@ -1,7 +1,7 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import App from "./container/App.js"
-import "./style.less"
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './container/App';
+import './style.less';
 
 // if (process.env.NODE_ENV === 'production') {
 //
@@ -11,4 +11,4 @@ import "./style.less"
 //     console.log('development');
 // }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));

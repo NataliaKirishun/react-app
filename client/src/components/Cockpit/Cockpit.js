@@ -1,36 +1,46 @@
-import React from 'react'
-import styled, {css} from 'styled-components'
-import RadioButton from '../../common/Components/RadioButton'
-import Theme from '../../common/Theme/Theme'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import RadioButton from '../../common/Components/RadioButton';
+import Theme from '../../common/Theme/Theme';
 
-const Cockpit = ({sortBy, toggleSortBy, filmsCount}) => {
-    return (
-        <Background>
-            <Wrapper>
-                <span>{filmsCount} movies found</span>
-                <form>
-                    <span>Sort by</span>
-                    <RadioButton
-                        inputName="sort"
-                        inputValue="release date"
-                        inputId="release"
-                        filtered={sortBy}
-                        handlerChange={toggleSortBy}
-                        transparent/>
-                    <RadioButton
-                        inputName="sort"
-                        inputValue="rating"
-                        inputId="rating"
-                        filtered={sortBy}
-                        handlerChange={toggleSortBy}
-                        transparent/>
-                </form>
-            </Wrapper>
-        </Background>
-    )
+const Cockpit = ({ sortBy, toggleSortBy, filmsCount }) => {
+  return (
+    <Background>
+      <Wrapper>
+        <span>
+          {filmsCount}
+          {'movies found'}
+        </span>
+        <form>
+          <span>Sort by</span>
+          <RadioButton
+            inputName="sort"
+            inputValue="release date"
+            inputId="release"
+            filtered={sortBy}
+            handlerChange={toggleSortBy}
+            transparent />
+          <RadioButton
+            inputName="sort"
+            inputValue="rating"
+            inputId="rating"
+            filtered={sortBy}
+            handlerChange={toggleSortBy}
+            transparent />
+        </form>
+      </Wrapper>
+    </Background>
+  );
 };
 
 export default Cockpit;
+
+Cockpit.propTypes = {
+  sortBy: PropTypes.string.isRequired,
+  toggleSortBy: PropTypes.func.isRequired,
+  filmsCount: PropTypes.number.isRequired,
+};
 
 const Background = styled.div` 
     width: 100%;
@@ -44,5 +54,3 @@ const Wrapper = styled.div`
     margin: 0 auto;
     padding: 10px 0;
 `;
-
-

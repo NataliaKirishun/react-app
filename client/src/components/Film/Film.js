@@ -1,18 +1,40 @@
-import React from 'react'
-import styled, {css} from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const Film = ({info, albumClickHandler}) => (
-    <FilmLink onClick={() => albumClickHandler(info.id)}>
-        <Img src={info.poster_path}/>
-        <InfoWrapper>
-            <Title>{info.title}</Title>
-            <span>{info.genres.join(', ')}</span>
-            <FilmYearRelease>{info.release_date.split('-')[0]}</FilmYearRelease>
-        </InfoWrapper>
-    </FilmLink>
+const Film = ({ info, albumClickHandler }) => (
+  <FilmLink onClick={() => albumClickHandler(info.id)}>
+    <Img src={info.poster_path} />
+    <InfoWrapper>
+      <Title>{info.title}</Title>
+      <span>{info.genres.join(', ')}</span>
+      <FilmYearRelease>
+        {info.release_date.split('-')[0]}
+      </FilmYearRelease>
+    </InfoWrapper>
+  </FilmLink>
 );
 
 export default Film;
+
+Film.propTypes = {
+  info: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    tagline: PropTypes.string,
+    image: PropTypes.string,
+    vote_average: PropTypes.number,
+    vote_count: PropTypes.number,
+    releasedate: PropTypes.number,
+    poster_path: PropTypes.string,
+    overview: PropTypes.string,
+    budget: PropTypes.number,
+    revenue: PropTypes.number,
+    genres: PropTypes.array,
+    runtime: PropTypes.number,
+  }),
+  albumClickHandler: PropTypes.func.isRequired,
+};
 
 const FilmLink = styled.a`
     position: relative;

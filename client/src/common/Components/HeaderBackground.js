@@ -1,7 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import Theme from '../Theme/Theme'
-import bckgImage from '../../assets/images/films.jpeg'
+import styled from 'styled-components';
+import Theme from '../Theme/Theme';
+import bckgImage from '../../assets/images/films.jpeg';
 
 
 const HeaderBackground = styled.div`

@@ -1,0 +1,47 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react", "jsx-a11y", "import", "mocha", "jest", "cypress"],
+  "rules": {
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "components": ["Label"],
+        "required": {
+          "every": ["id"]
+        },
+        "allowChildren": false
+      }
+    ],
+    "no-debugger": 0,
+    "react/no-unused-state": 0,
+    "class-methods-use-this": 0,
+    "no-console": 0,
+    "default-case": 0,
+    "no-param-reassign": 0,
+    "mocha/no-exclusive-tests": "error",
+    "func-names": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "react/prefer-stateless-function": [1, { "ignorePureComponents": true }],
+    "react/require-default-props": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "arrow-parens": 0,
+    "arrow-body-style": 0,
+    "react/prop-types": 1,
+    "no-unused-vars": 1,
+    "function-paren-newline": 0,
+    "linebreak-style": 0,
+    "max-len": [1, 150, 2, { "ignoreComments": true }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "no-shadow": ["error", { "builtinGlobals": false, "hoist": "functions", "allow": [] }]
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true,
+    "jest": true,
+    "cypress/globals": true
+  },
+  "extends": ["airbnb"]
+}

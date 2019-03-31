@@ -1,18 +1,24 @@
-import React, {Component} from 'react'
-import styled, {css} from 'styled-components'
-import Theme from '../../common/Theme/Theme'
-import Film from '../Film/Film'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Theme from '../../common/Theme/Theme';
+import Film from '../Film/Film';
 
 
-const Films = ({films, albumClickHandler}) => (
-    <FilmsBackground>
-        <FilmsWrapper>
-            {films.map((film)=> <Film info={film} key={film.id} albumClickHandler={albumClickHandler}/>)}
-        </FilmsWrapper>
-    </FilmsBackground>
+const Films = ({ films, albumClickHandler }) => (
+  <FilmsBackground>
+    <FilmsWrapper>
+      {films.map((film) => <Film info={film} key={film.id} albumClickHandler={albumClickHandler} />)}
+    </FilmsWrapper>
+  </FilmsBackground>
 );
 
 export default Films;
+
+Films.propTypes = {
+  films: PropTypes.arrayOf(PropTypes.object).isRequired,
+  albumClickHandler: PropTypes.func.isRequired,
+};
 
 const FilmsBackground = styled.div`
     flex: 1 0 auto;
