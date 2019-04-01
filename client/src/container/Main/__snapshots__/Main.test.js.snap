@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main Component Snapshot Main Component should render movies layout when there are several films found by the request 1`] = `
+<main
+  class="sc-jTzLTM etDbwe"
+>
+  <div
+    class="sc-htpNat kfOUmV"
+  >
+    <div
+      class="sc-bxivhb lhJBmx"
+    >
+      <span>
+        1movies found
+      </span>
+      <form>
+        <span>
+          Sort by
+        </span>
+        <input
+          class="sc-bdVaJa dDqVak"
+          id="release"
+          name="sort"
+          type="radio"
+          value="release date"
+        />
+        <label
+          class="sc-bwzfXH loaEVr"
+          for="release"
+        >
+          release date
+        </label>
+        <input
+          class="sc-bdVaJa dDqVak"
+          id="rating"
+          name="sort"
+          type="radio"
+          value="rating"
+        />
+        <label
+          class="sc-bwzfXH FnSOv"
+          for="rating"
+        >
+          rating
+        </label>
+      </form>
+    </div>
+  </div>
+  <div
+    class="sc-gqjmRU deGoKe"
+  >
+    <div
+      class="sc-VigVT hdSXxk"
+    >
+      <a
+        class="sc-gzVnrw bsLiew"
+      >
+        <img
+          class="sc-htoDjs hDxLSp"
+          src="https://image.tmdb.org/t/p/w500/6u1fYtxG5eqjhtCPDx04pJphQRW.jpg"
+        />
+        <div
+          class="sc-dnqmqq bEnhKB"
+        >
+          <h3
+            class="sc-iwsKbI dcBvve"
+          >
+            The Empire Strikes Back
+          </h3>
+          <span>
+            Adventure, Action, Science Fiction
+          </span>
+          <span
+            class="sc-gZMcBi iJEmXo"
+          >
+            1980
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+`;
+
+exports[`Main Component Snapshot Main Component should render warning that no films were found when there are no such films 1`] = `
+<styled.main>
+  <Cockpit
+    filmsCount={0}
+    sortBy="release date"
+    toggleSortBy={[Function]}
+  />
+  <EmptyResults
+    text="No films found for this request..."
+  />
+</styled.main>
+`;

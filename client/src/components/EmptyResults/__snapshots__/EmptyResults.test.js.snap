@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmptyResults Snapshot EmptyResults Component should render correctly with given props 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.p>
+      Empty result
+    </styled.p>
+  </styled.div>
+</styled.div>
+`;

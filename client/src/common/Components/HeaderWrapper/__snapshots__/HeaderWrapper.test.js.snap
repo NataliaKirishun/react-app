@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HeaderWrapper Snapshot HeaderWrapper Component should render correctly 1`] = `
+exports[`HeaderWrapper Snapshot HeaderWrapper Component should render correctly with no props 1`] = `
 <StyledComponent
   forwardedComponent={
     Object {

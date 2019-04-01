@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Logo Snapshot Logo Component should render correctly 1`] = `
+exports[`Logo Snapshot Logo Component should render correctly with no props 1`] = `
 <styled.a>
   netflixroulette
 </styled.a>

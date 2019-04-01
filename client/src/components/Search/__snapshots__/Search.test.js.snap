@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Component Snapshot Search Component should render correctly with given props 1`] = `
+<div
+  class="sc-ifAKCX hiyrFH"
+>
+  <div
+    class="sc-EHOje cGimBl"
+  >
+    <a
+      class="sc-bdVaJa gidgBK"
+    >
+      netflixroulette
+    </a>
+    <h2
+      class="sc-bZQynM bxzawC"
+    >
+      find your movie
+    </h2>
+    <form
+      class="sc-gzVnrw ibCaFK"
+    >
+      <div
+        class="sc-htoDjs gniiQQ"
+      >
+        <input
+          class="sc-dnqmqq hjbrp"
+          id="searchInput"
+          placeholder="Search here..."
+          required=""
+        />
+        <label
+          class="sc-iwsKbI itrBrl"
+          for="searchInput"
+        >
+          <i
+            class="fas fa-level-down-alt"
+          />
+        </label>
+      </div>
+      <div
+        class="sc-gZMcBi dkEHyZ"
+      >
+        <h2
+          class="sc-bZQynM fOfwpV"
+        >
+          search by
+        </h2>
+        <input
+          class="sc-bwzfXH exzExq"
+          id="titleChoice"
+          name="searchBy"
+          type="radio"
+          value="title"
+        />
+        <label
+          class="sc-htpNat eysLDB"
+          for="titleChoice"
+        >
+          title
+        </label>
+        <input
+          class="sc-bwzfXH exzExq"
+          id="genreChoice"
+          name="searchBy"
+          type="radio"
+          value="genre"
+        />
+        <label
+          class="sc-htpNat bAIumz"
+          for="genreChoice"
+        >
+          genre
+        </label>
+        <button
+          class="sc-bxivhb inMMxH"
+          type="submit"
+        >
+          search
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+`;
