@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Logo from '../../common/Components/Logo';
-import RadioButton from '../../common/Components/RadioButton';
-import Button from '../../common/Components/Button';
+import Logo from '../../common/Components/Logo/Logo';
+import RadioButton from '../../common/Components/RadioButton/RadioButton';
+import Button from '../../common/Components/Button/Button';
 import Theme from '../../common/Theme/Theme';
-import HeaderBackground from '../../common/Components/HeaderBackground';
-import HeaderWrapper from '../../common/Components/HeaderWrapper';
+import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
+import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 
 const Search = ({
   searchBy,

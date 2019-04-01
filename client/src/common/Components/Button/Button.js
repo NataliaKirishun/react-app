@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Theme from '../Theme/Theme';
+import Theme from '../../Theme/Theme';
 
 const Button = styled.button`
     font-size: 16px;
@@ -9,6 +9,7 @@ const Button = styled.button`
     text-transform: uppercase;
     border-radius: 4px;
     outline: none;
+    cursor: pointer;
     
     ${props => props.red && css`
         background-color: ${Theme.colors.red};

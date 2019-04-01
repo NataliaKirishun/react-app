@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled, { css } from 'styled-components';
-import Theme from '../Theme/Theme';
+import Theme from '../../Theme/Theme';
 
 const RadioButton = ({
   inputName,
@@ -34,7 +34,8 @@ const RadioInput = styled.input`
 const RadioLabel = styled.label`
   cursor: pointer;
   margin-left: 20px;    
-  border-radius: 4px;    
+  border-radius: 4px;
+  cursor: pointer;    
    
    ${props => props.colored && css`
         background-color: ${Theme.colors.medium_grey};

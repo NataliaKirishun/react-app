@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Theme from '../../common/Theme/Theme';
-import Logo from '../../common/Components/Logo';
-import Button from '../../common/Components/Button';
-import HeaderBackground from '../../common/Components/HeaderBackground';
-import HeaderWrapper from '../../common/Components/HeaderWrapper';
+import Logo from '../../common/Components/Logo/Logo';
+import Button from '../../common/Components/Button/Button';
+import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
+import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 
 const Detail = ({ targetFilm, searchButtonHandler }) => {
   return (

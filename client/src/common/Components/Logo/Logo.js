@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Theme from '../Theme/Theme';
+import Theme from '../../Theme/Theme';
 
 const Logo = () => <LogoText>netflixroulette</LogoText>;
 

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButton Snapshot RadioButton Component should render correctly 1`] = `
+<Fragment>
+  <styled.input
+    onChange={[Function]}
+    type="radio"
+  />
+  <styled.label
+    active={true}
+  />
+</Fragment>
+`;

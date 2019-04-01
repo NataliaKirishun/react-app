@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import RadioButton from '../../common/Components/RadioButton';
+import RadioButton from '../../common/Components/RadioButton/RadioButton';
 import Theme from '../../common/Theme/Theme';
 
 const Cockpit = ({ sortBy, toggleSortBy, filmsCount }) => {
@@ -37,7 +37,7 @@ const Cockpit = ({ sortBy, toggleSortBy, filmsCount }) => {
 export default Cockpit;
 
 Cockpit.propTypes = {
-  sortBy: PropTypes.string.isRequired,
+  sortBy: PropTypes.string,
   toggleSortBy: PropTypes.func.isRequired,
   filmsCount: PropTypes.number.isRequired,
 };

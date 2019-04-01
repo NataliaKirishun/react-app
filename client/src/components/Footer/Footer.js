@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Theme from '../../common/Theme/Theme';
-import Logo from '../../common/Components/Logo';
+import Logo from '../../common/Components/Logo/Logo';
 
 const Footer = () => (
   <FooterBackground>
