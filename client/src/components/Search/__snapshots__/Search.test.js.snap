@@ -1,85 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Search Component Snapshot Search Component should render correctly with given props 1`] = `
-<div
-  class="sc-ifAKCX hiyrFH"
->
-  <div
-    class="sc-EHOje cGimBl"
-  >
-    <a
-      class="sc-bdVaJa gidgBK"
-    >
-      netflixroulette
-    </a>
-    <h2
-      class="sc-bZQynM bxzawC"
+<styled.div>
+  <styled.div>
+    <Logo />
+    <styled.h2
+      main={true}
     >
       find your movie
-    </h2>
-    <form
-      class="sc-gzVnrw ibCaFK"
+    </styled.h2>
+    <styled.form
+      onSubmit={[MockFunction]}
     >
-      <div
-        class="sc-htoDjs gniiQQ"
-      >
-        <input
-          class="sc-dnqmqq hjbrp"
+      <styled.div>
+        <styled.input
+          autoFocus={true}
           id="searchInput"
+          onChange={[Function]}
           placeholder="Search here..."
-          required=""
+          required={true}
         />
-        <label
-          class="sc-iwsKbI itrBrl"
-          for="searchInput"
+        <styled.label
+          htmlFor="searchInput"
         >
           <i
-            class="fas fa-level-down-alt"
+            className="fas fa-level-down-alt"
           />
-        </label>
-      </div>
-      <div
-        class="sc-gZMcBi dkEHyZ"
-      >
-        <h2
-          class="sc-bZQynM fOfwpV"
+        </styled.label>
+      </styled.div>
+      <styled.div>
+        <styled.h2
+          small={true}
         >
           search by
-        </h2>
-        <input
-          class="sc-bwzfXH exzExq"
-          id="titleChoice"
-          name="searchBy"
-          type="radio"
-          value="title"
+        </styled.h2>
+        <RadioButton
+          colored={true}
+          filtered="title"
+          handlerChange={[MockFunction]}
+          inputId="titleChoice"
+          inputName="searchBy"
+          inputValue="title"
         />
-        <label
-          class="sc-htpNat eysLDB"
-          for="titleChoice"
-        >
-          title
-        </label>
-        <input
-          class="sc-bwzfXH exzExq"
-          id="genreChoice"
-          name="searchBy"
-          type="radio"
-          value="genre"
+        <RadioButton
+          colored={true}
+          filtered="title"
+          handlerChange={[MockFunction]}
+          inputId="genreChoice"
+          inputName="searchBy"
+          inputValue="genre"
         />
-        <label
-          class="sc-htpNat bAIumz"
-          for="genreChoice"
-        >
-          genre
-        </label>
-        <button
-          class="sc-bxivhb inMMxH"
+        <styled.button
+          id="searchBtn"
+          red={true}
           type="submit"
         >
           search
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+        </styled.button>
+      </styled.div>
+    </styled.form>
+  </styled.div>
+</styled.div>
 `;

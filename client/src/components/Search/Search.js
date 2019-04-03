@@ -25,7 +25,8 @@ const Search = ({
               id="searchInput"
               placeholder="Search here..."
               onChange={(evt) => inputChangeHandler(evt)}
-              required />
+              required
+              autoFocus />
             <LabelArrow htmlFor="searchInput">
               <i className="fas fa-level-down-alt" />
             </LabelArrow>
@@ -46,7 +47,7 @@ const Search = ({
               filtered={searchBy}
               handlerChange={toggleSearchBy}
               colored />
-            <Button type="submit" red>search</Button>
+            <Button id="searchBtn" type="submit" red>search</Button>
           </SearchWrapper>
         </Form>
       </HeaderWrapper>
@@ -106,7 +107,9 @@ const LabelArrow = styled.label`
     transform: rotate(90deg);  
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.div.attrs({
+  className: 'search-wrapper',
+})`
     display: flex;
     align-items: center;  
 `;

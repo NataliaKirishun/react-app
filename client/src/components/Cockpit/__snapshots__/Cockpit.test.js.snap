@@ -3,10 +3,16 @@
 exports[`Cockpit Snapshot Cockpit Component should render correctly with given props 1`] = `
 <styled.div>
   <styled.div>
-    <span>
-      10
-      movies found
-    </span>
+    <div>
+      <span
+        id="filmsCount"
+      >
+        10
+      </span>
+      <span>
+         movies found
+      </span>
+    </div>
     <form>
       <span>
         Sort by

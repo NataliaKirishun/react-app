@@ -1,73 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header Component Snapshot Header Component should render correctly with given props 1`] = `
-<header
-  class="sc-kAzzGY bODEjt"
->
-  <div
-    class="sc-htpNat gfzgNE"
-  >
-    <div
-      class="sc-bxivhb fCEMHd"
-    >
-      <div
-        class="sc-ifAKCX dJXBli"
-      >
-        <a
-          class="sc-bdVaJa gidgBK"
-        >
-          netflixroulette
-        </a>
-        <button
-          class="sc-bwzfXH ftiveX"
-        >
-          Search
-        </button>
-      </div>
-      <div
-        class="sc-ifAKCX dJXBli"
-      >
-        <div
-          class="sc-EHOje CbvPR"
-        >
-          <img
-            class="sc-gzVnrw eVMzlz"
-            src="https://image.tmdb.org/t/p/w500/xY7k2M9eElJnLSYwqY85Xon5z6m.jpg"
-          />
-        </div>
-        <div
-          class="sc-bZQynM eMGyob"
-        >
-          <h3
-            class="sc-htoDjs jcOCnR"
-          >
-            Papillon
-          </h3>
-          <span
-            class="sc-dnqmqq llFczy"
-          >
-            Crime, Drama
-          </span>
-          <div>
-            <span
-              class="sc-dnqmqq iexaMn"
-            >
-              1973
-            </span>
-            <span
-              class="sc-dnqmqq iexaMn"
-            >
-              151min
-            </span>
-          </div>
-          <span
-            class="sc-dnqmqq llFczy"
-          >
-            A man befriends a fellow criminal as the two of them begin serving their sentence on a dreadful prison island, which inspires the man to plot his escape.
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+exports[`Header Component Snapshot testing Header Component should render correctly with given props 1`] = `
+<styled.header>
+  <Detail
+    searchButtonHandler={[MockFunction]}
+    targetFilm={
+      Object {
+        "budget": 12000000,
+        "genres": Array [
+          "Crime",
+          "Drama",
+        ],
+        "id": 5924,
+        "overview": "A man befriends a fellow criminal as the two of them begin serving their sentence on a dreadful prison island, which inspires the man to plot his escape.",
+        "poster_path": "https://image.tmdb.org/t/p/w500/xY7k2M9eElJnLSYwqY85Xon5z6m.jpg",
+        "release_date": "1973-12-13",
+        "revenue": 53267000,
+        "runtime": 151,
+        "tagline": "The greatest adventure of escape!",
+        "title": "Papillon",
+        "vote_average": 7.8,
+        "vote_count": 564,
+      }
+    }
+  />
+</styled.header>
 `;

@@ -8,10 +8,14 @@ const Cockpit = ({ sortBy, toggleSortBy, filmsCount }) => {
   return (
     <Background>
       <Wrapper>
-        <span>
-          {filmsCount}
-          {'movies found'}
-        </span>
+        <div>
+          <span id="filmsCount">
+            {filmsCount}
+          </span>
+          <span>
+            {' movies found'}
+          </span>
+        </div>
         <form>
           <span>Sort by</span>
           <RadioButton

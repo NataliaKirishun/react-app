@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -14,9 +14,10 @@ class App extends Component {
     searched: false,
   };
 
-  searchFilms = ({searchBy, term}) => {
+  searchFilms = ({ searchBy, term }) => {
+    const { allFilms } = this.state;
     const filterVariable = searchBy === 'title' ? 'title' : 'genres';
-    const filtered = this.state.allFilms.filter((item) => {
+    const filtered = allFilms.filter((item) => {
       if (typeof item[filterVariable] === 'string') {
         return item[filterVariable].toLowerCase().indexOf(term) > -1;
       }
@@ -34,12 +35,14 @@ class App extends Component {
   }
 
   albumClickHandler = (id) => {
-    const targetFilm = this.state.filteredFilms.filter((film) => {
+    const { filteredFilms } = this.state;
+    const targetFilm = filteredFilms.filter((film) => {
       return film.id === id;
     })[0];
     this.setState({
       activeFilm: targetFilm,
     });
+    window.scrollTo(0, 0);
   }
 
   searchButtonHandler = () => {
@@ -49,20 +52,21 @@ class App extends Component {
   }
 
   render() {
+    const { activeFilm, searched, filteredFilms } = this.state;
     return (
       <AppWrapper>
         <ErrorBoundary>
           <Header
-            activeFilm={this.state.activeFilm}
+            activeFilm={activeFilm}
             searchFilmsHandler={this.searchFilms}
-            searchButtonHandler = {this.searchButtonHandler}
+            searchButtonHandler={this.searchButtonHandler}
           />
         </ErrorBoundary>
         <Main
-          searched={this.state.searched}
-          filteredFilms={this.state.filteredFilms}
-          albumClickHandler={this.albumClickHandler}/>
-        <Footer/>
+          searched={searched}
+          filteredFilms={filteredFilms}
+          albumClickHandler={this.albumClickHandler} />
+        <Footer />
       </AppWrapper>
     );
   }
@@ -76,4 +80,3 @@ const AppWrapper = styled.div`
     display: flex;
     flex-direction: column;
 `;
-

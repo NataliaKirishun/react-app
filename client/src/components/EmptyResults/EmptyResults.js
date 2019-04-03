@@ -28,7 +28,9 @@ const EmptyContainer = styled.div`
     margin: 0 auto;  
 `;
 
-const EmptyText = styled.p`
+const EmptyText = styled.p.attrs({
+  className: 'empty-text',
+})`
    color: ${Theme.colors.red}; 
    text-align: center;
    vertical-align: middle;

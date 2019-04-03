@@ -10,9 +10,16 @@ exports[`Main Component Snapshot Main Component should render movies layout when
     <div
       class="sc-bxivhb lhJBmx"
     >
-      <span>
-        1movies found
-      </span>
+      <div>
+        <span
+          id="filmsCount"
+        >
+          1
+        </span>
+        <span>
+           movies found
+        </span>
+      </div>
       <form>
         <span>
           Sort by
@@ -27,6 +34,7 @@ exports[`Main Component Snapshot Main Component should render movies layout when
         <label
           class="sc-bwzfXH loaEVr"
           for="release"
+          id="active"
         >
           release date
         </label>
@@ -53,7 +61,7 @@ exports[`Main Component Snapshot Main Component should render movies layout when
       class="sc-VigVT hdSXxk"
     >
       <a
-        class="sc-gzVnrw bsLiew"
+        class="sc-gzVnrw film-link jVAKsy"
       >
         <img
           class="sc-htoDjs hDxLSp"

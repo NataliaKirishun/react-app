@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Search from './Search';
 
 describe('Search Component Snapshot', () => {
@@ -8,7 +8,7 @@ describe('Search Component Snapshot', () => {
         const inputChangeHandler=jest.fn();
         const toggleSearchBy=jest.fn();
         const formSubmitHandler=jest.fn();
-        const component = render(<Search searchBy={searchBy} inputChangeHandler={inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={formSubmitHandler}/>);
+        const component = shallow(<Search searchBy={searchBy} inputChangeHandler={inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={formSubmitHandler}/>);
         expect(component).toMatchSnapshot();
     });
 });

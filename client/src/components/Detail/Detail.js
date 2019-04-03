@@ -13,7 +13,7 @@ const Detail = ({ targetFilm, searchButtonHandler }) => {
       <HeaderWrapper>
         <Container>
           <Logo />
-          <Button onClick={() => searchButtonHandler()} white>Search</Button>
+          <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
         </Container>
         <Container>
           <PosterWrapper>
@@ -66,7 +66,9 @@ const PosterWrapper = styled.div`
     padding-top: 22.5%;
 `;
 
-const InfoWrapper = styled.div`
+const InfoWrapper = styled.div.attrs({
+  className: 'film-info-wrapper',
+})`
     display: flex;
     flex-direction: column;
     align-items: flex-start;

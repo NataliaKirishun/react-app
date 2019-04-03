@@ -5,7 +5,8 @@ import Theme from '../../Theme/Theme';
 const RadioButton = ({
   inputName,
   inputValue,
-  inputId, filtered,
+  inputId,
+  filtered,
   handlerChange,
   ...props
 }) => (
@@ -18,6 +19,7 @@ const RadioButton = ({
       onChange={(evt) => handlerChange(evt)} />
     <RadioLabel
       htmlFor={inputId}
+      id={filtered === inputValue ? 'active' : undefined}
       active={filtered === inputValue}
       {...props}>
       {inputValue}

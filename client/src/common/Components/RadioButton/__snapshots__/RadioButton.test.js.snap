@@ -8,6 +8,7 @@ exports[`RadioButton Snapshot RadioButton Component should render correctly with
   />
   <styled.label
     active={true}
+    id="active"
   />
 </Fragment>
 `;
@@ -24,6 +25,7 @@ exports[`RadioButton Snapshot RadioButton Component should render radio button c
   <styled.label
     active={true}
     htmlFor="radioButton"
+    id="active"
   >
     radio button
   </styled.label>

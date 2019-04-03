@@ -36,14 +36,17 @@ Film.propTypes = {
   albumClickHandler: PropTypes.func.isRequired,
 };
 
-const FilmLink = styled.a`
+const FilmLink = styled.a.attrs({
+  className: 'film-link',
+})`
     position: relative;
     width: 30%;
     height: 0;
     padding-top: 55%;
     text-decoration: none;
     box-shadow: 0 4px 11px 0 grey;
-    margin-bottom: 30px;  
+    margin-bottom: 30px;
+    cursor: pointer;  
       
   @media (max-width: 900px) {
     width: 48%;

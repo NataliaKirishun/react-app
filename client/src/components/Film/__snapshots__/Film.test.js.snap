@@ -2,7 +2,7 @@
 
 exports[`Film Snapshot Film Component should render correctly with given props 1`] = `
 <a
-  class="sc-bdVaJa mhsjn"
+  class="sc-bdVaJa film-link dQMKLa"
 >
   <img
     class="sc-bwzfXH ifbPgJ"

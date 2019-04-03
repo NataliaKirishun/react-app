@@ -8,7 +8,7 @@ exports[`Films Snapshot Films Component should render correctly with given props
     class="sc-bZQynM gSRbGQ"
   >
     <a
-      class="sc-bdVaJa mhsjn"
+      class="sc-bdVaJa film-link dQMKLa"
     >
       <img
         class="sc-bwzfXH ifbPgJ"
@@ -33,7 +33,7 @@ exports[`Films Snapshot Films Component should render correctly with given props
       </div>
     </a>
     <a
-      class="sc-bdVaJa mhsjn"
+      class="sc-bdVaJa film-link dQMKLa"
     >
       <img
         class="sc-bwzfXH ifbPgJ"

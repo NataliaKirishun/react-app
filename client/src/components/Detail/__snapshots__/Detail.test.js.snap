@@ -1,69 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Detail Snapshot Deatil Component should render correctly with given props 1`] = `
-<div
-  class="sc-htpNat gfzgNE"
->
-  <div
-    class="sc-bxivhb fCEMHd"
-  >
-    <div
-      class="sc-ifAKCX dJXBli"
-    >
-      <a
-        class="sc-bdVaJa gidgBK"
-      >
-        netflixroulette
-      </a>
-      <button
-        class="sc-bwzfXH ftiveX"
+<styled.div>
+  <styled.div>
+    <styled.div>
+      <Logo />
+      <styled.button
+        id="backToSearch"
+        onClick={[Function]}
+        white={true}
       >
         Search
-      </button>
-    </div>
-    <div
-      class="sc-ifAKCX dJXBli"
-    >
-      <div
-        class="sc-EHOje CbvPR"
-      >
-        <img
-          class="sc-gzVnrw eVMzlz"
+      </styled.button>
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.img
           src="https://image.tmdb.org/t/p/w500/iunmxWkOi7Vk17Ob3G2HwwjgHsr.jpg"
         />
-      </div>
-      <div
-        class="sc-bZQynM eMGyob"
-      >
-        <h3
-          class="sc-htoDjs jcOCnR"
-        >
+      </styled.div>
+      <styled.div>
+        <styled.h3>
           The Pianist
-        </h3>
-        <span
-          class="sc-dnqmqq llFczy"
-        >
+        </styled.h3>
+        <styled.span>
           Drama, War
-        </span>
+        </styled.span>
         <div>
-          <span
-            class="sc-dnqmqq iexaMn"
+          <styled.span
+            bold={true}
           >
             2002
-          </span>
-          <span
-            class="sc-dnqmqq iexaMn"
+          </styled.span>
+          <styled.span
+            bold={true}
           >
-            150min
-          </span>
+            150
+            min
+          </styled.span>
         </div>
-        <span
-          class="sc-dnqmqq llFczy"
-        >
+        <styled.span>
           The true story of pianist Wladyslaw Szpilman's experiences in Warsaw during the Nazi occupation. When the Jews of the city find themselves forced into a ghetto, Szpilman finds work playing in a café; and when his family is deported in 1942, he stays behind, works for a while as a laborer, and eventually goes into hiding in the ruins of the war-torn city.
-        </span>
-      </div>
-    </div>
-  </div>
-</div>
+        </styled.span>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</styled.div>
 `;

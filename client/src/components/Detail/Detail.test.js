@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Detail from './Detail';
 
 describe('Detail Snapshot', () => {
@@ -19,7 +19,7 @@ describe('Detail Snapshot', () => {
             "runtime":150
         };
         const searchButtonHandler=jest.fn();
-        const component = render(<Detail targetFilm={targetFilm} searchButtonHandler={searchButtonHandler} />);
+        const component = shallow(<Detail targetFilm={targetFilm} searchButtonHandler={searchButtonHandler} />);
         expect(component).toMatchSnapshot();
     });
 });

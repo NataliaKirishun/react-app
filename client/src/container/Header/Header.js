@@ -10,7 +10,6 @@ class Header extends Component {
     term: '',
   };
 
-
   inputChangeHandler = (e) => {
     this.setState({
       term: e.target.value,
@@ -25,36 +24,38 @@ class Header extends Component {
 
   formSubmitHandler = (e) => {
     const { searchBy, term } = this.state;
+    const { searchFilmsHandler } = this.props;
     e.preventDefault();
-    this.props.searchFilmsHandler({
+    searchFilmsHandler({
       searchBy,
-      term: term.toLowerCase()});
+      term: term.toLowerCase(),
+    });
     this.setState({
       term: '',
     });
-
   }
 
   render() {
-    const activeFilm = this.props.activeFilm;
-    return(
+    const { activeFilm, searchButtonHandler } = this.props;
+    const { searchBy } = this.state;
+    return (
       <HeaderWrapper>
         {activeFilm
           ? (
             <Detail
               targetFilm={activeFilm}
-              searchButtonHandler={this.props.searchButtonHandler} />
+              searchButtonHandler={searchButtonHandler} />
           )
           : (
             <Search
-              searchBy={this.state.searchBy}
+              searchBy={searchBy}
               inputChangeHandler={this.inputChangeHandler}
               toggleSearchBy={this.toggleSearchBy}
               formSubmitHandler={this.formSubmitHandler} />
           )
         }
       </HeaderWrapper>
-    )
+    );
   }
 }
 
