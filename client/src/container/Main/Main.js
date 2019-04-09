@@ -19,6 +19,7 @@ class Main extends Component {
   sortFilms = () => {
     const { sortBy } = this.state;
     const { filteredFilms } = this.props;
+    console.log(filteredFilms);
     const sortFunction = sortBy === 'release date'
       ? (a, b) => {
         return new Date(a.release_date) - new Date(b.release_date);

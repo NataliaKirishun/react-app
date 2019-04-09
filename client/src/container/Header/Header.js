@@ -10,9 +10,9 @@ class Header extends Component {
     term: '',
   };
 
-  inputChangeHandler = (e) => {
+  inputChangeHandler = ({ target: { value} }) => {
     this.setState({
-      term: e.target.value,
+      term: value,
     });
   }
 

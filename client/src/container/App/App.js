@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../../components/Footer/Footer';
@@ -9,9 +10,8 @@ import mock from '../../mock.json';
 class App extends Component {
   state = {
     allFilms: mock.data,
-    filteredFilms: [],
     activeFilm: null,
-    searched: false,
+    searched: true,
   };
 
   searchFilms = ({ searchBy, term }) => {
@@ -52,7 +52,10 @@ class App extends Component {
   }
 
   render() {
-    const { activeFilm, searched, filteredFilms } = this.state;
+    const { activeFilm, searched } = this.state;
+    const { movies } = this.props.movies;
+    console.log('props', this.props);
+    console.log('movies',movies);
     return (
       <AppWrapper>
         <ErrorBoundary>
@@ -64,7 +67,7 @@ class App extends Component {
         </ErrorBoundary>
         <Main
           searched={searched}
-          filteredFilms={filteredFilms}
+          filteredFilms={movies}
           albumClickHandler={this.albumClickHandler} />
         <Footer />
       </AppWrapper>
@@ -72,7 +75,9 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect( state => ({
+    movies: state.movies
+}))(App);
 
 const AppWrapper = styled.div`
     width: 100%;
