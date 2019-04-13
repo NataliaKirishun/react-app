@@ -8,11 +8,6 @@ import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 import mock from '../../mock.json';
 
 class App extends Component {
-  state = {
-    allFilms: mock.data,
-    activeFilm: null,
-    searched: true,
-  };
 
   searchFilms = ({ searchBy, term }) => {
     const { allFilms } = this.state;
@@ -52,22 +47,17 @@ class App extends Component {
   }
 
   render() {
-    const { activeFilm, searched } = this.state;
     const { movies } = this.props.movies;
-    console.log('props', this.props);
-    console.log('movies',movies);
+
     return (
       <AppWrapper>
         <ErrorBoundary>
           <Header
-            activeFilm={activeFilm}
             searchFilmsHandler={this.searchFilms}
             searchButtonHandler={this.searchButtonHandler}
           />
         </ErrorBoundary>
         <Main
-          searched={searched}
-          filteredFilms={movies}
           albumClickHandler={this.albumClickHandler} />
         <Footer />
       </AppWrapper>

@@ -1,50 +1,68 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Cockpit from '../../components/Cockpit/Cockpit';
 import EmptyResults from '../../components/EmptyResults/EmptyResults';
 import Films from '../../components/Films/Films';
+import Pagination from '../../common/Components/Pagination/Pagination';
 
 class Main extends Component {
-  state = {
-    sortBy: 'release date',
-  }
 
-  toggleSortBy = (e) => {
-    this.setState({
-      sortBy: e.target.value,
-    });
-  }
-
-  sortFilms = () => {
-    const { sortBy } = this.state;
-    const { filteredFilms } = this.props;
-    console.log(filteredFilms);
-    const sortFunction = sortBy === 'release date'
-      ? (a, b) => {
-        return new Date(a.release_date) - new Date(b.release_date);
-      }
-      : (a, b) => {
-        return a.vote_average - b.vote_average;
-      };
-    return filteredFilms.sort(sortFunction);
-  }
+    getPagesArray(){
+         const { albumClickHandler, movies, isFetched, total, currentPage, moviesPerPage } = this.props;
+         const pagesCount = Math.ceil(total/moviesPerPage);
+         let startPage;
+         let lastPage;
+         let pagesArray=[];
+         let firstPageIsShown;
+         let lastPageIsShown;
+         if (currentPage<=5) {
+            startPage = 1;
+            lastPage = Math.min(Math.max(currentPage + 2, 5),pagesCount);
+            firstPageIsShown = false;
+            lastPageIsShown = (pagesCount>=5)? true : false;
+         } else if (currentPage>=pagesCount-3) {
+            startPage = currentPage-2;
+            lastPage= pagesCount
+            firstPageIsShown= true;
+            lastPageIsShown= false;
+         } else {
+            startPage=currentPage-2;
+            lastPage=currentPage+2;
+            firstPageIsShown= true;
+            lastPageIsShown= true;
+         }
+         for (let i=startPage; i<=lastPage; i++) {
+            pagesArray.push(i);
+         }
+         return { pagesArray,pagesCount, firstPageIsShown, lastPageIsShown, moviesPerPage };
+    }
 
   render() {
-    const { searched, filteredFilms, albumClickHandler } = this.props;
-    const { sortBy } = this.state;
-    const warningText = searched ? 'No films found for this request...' : 'Please, select your desired film.. ';
+    const { albumClickHandler, movies, isFetched, total, currentPage, moviesPerPage } = this.props;
+
+    const warningText = isFetched ? 'No films found for this request...' : 'Please, select your desired film.. ';
     return (
       <MainWrapper>
-        <Cockpit
-          sortBy={sortBy}
-          toggleSortBy={this.toggleSortBy}
-          filmsCount={filteredFilms.length} />
-        {searched && filteredFilms.length
+        {isFetched && movies.length
           ? (
+          <Fragment>
+            <Pagination
+              paginationData={this.getPagesArray()}
+              currentPage={currentPage}
+              changePageHandler
+              changePerPageHandler
+            />
             <Films
-              films={this.sortFilms()}
+              films={movies}
               albumClickHandler={albumClickHandler} />
+            <Pagination
+              paginationData={this.getPagesArray()}
+              currentPage={currentPage}
+              changePageHandler
+              changePerPageHandler
+            />
+              </Fragment>
           )
           : <EmptyResults text={warningText} />
         }
@@ -53,7 +71,13 @@ class Main extends Component {
   }
 }
 
-export default Main;
+export default connect(({movies, search})=>({
+    movies: movies.movies,
+    isFetched: movies.isFetched,
+    total: movies.total,
+    currentPage: search.currentPage,
+    moviesPerPage: search.moviesPerPage,
+}))(Main);
 
 Main.propTypes = {
   searched: PropTypes.bool,
@@ -62,5 +86,6 @@ Main.propTypes = {
 };
 
 const MainWrapper = styled.main`
-    flex: 1 0 auto;    
+    flex: 1 0 auto;
+
 `;

@@ -36,14 +36,14 @@ const Search = ({
             <RadioButton
               inputName="searchBy"
               inputValue="title"
-              inputId="titleChoice"
+              inputId="title"
               filtered={searchBy}
               handlerChange={toggleSearchBy}
               colored />
             <RadioButton
               inputName="searchBy"
               inputValue="genre"
-              inputId="genreChoice"
+              inputId="genres"
               filtered={searchBy}
               handlerChange={toggleSearchBy}
               colored />
