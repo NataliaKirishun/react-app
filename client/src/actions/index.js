@@ -8,6 +8,8 @@ import {
     TOGGLE_SEARCH_BY,
     TOGGLE_SORT_BY,
     TOGGLE_SORT_ORDER,
+    CHANGE_PAGE,
+    CHANGE_ITEMS_PER_PAGE,
 } from '../constants';
 
 
@@ -40,6 +42,16 @@ export const toggleSortBy = sortBy => ({
 export const toggleSortOrder = sortOrder => ({
     type: TOGGLE_SORT_ORDER,
     sortOrder,
+})
+
+export const changePage = (id , currentPage) => ({
+    type: CHANGE_PAGE,
+    currentPage
+})
+
+export const changeMoviesPerPage = (id, moviesPerPage) => ({
+    type: CHANGE_ITEMS_PER_PAGE,
+    moviesPerPage
 })
 
 export const toggleSortDirectionHandler = (sortOrder) => dispatch => {

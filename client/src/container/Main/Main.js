@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import EmptyResults from '../../components/EmptyResults/EmptyResults';
 import Films from '../../components/Films/Films';
 import Pagination from '../../common/Components/Pagination/Pagination';
+import {changePage, changeMoviesPerPage} from '../../actions';
 
 class Main extends Component {
 
@@ -39,9 +40,9 @@ class Main extends Component {
     }
 
   render() {
-    const { albumClickHandler, movies, isFetched, total, currentPage, moviesPerPage } = this.props;
-
+    const { albumClickHandler, movies, isFetched, total, currentPage, moviesPerPage, changePage,changeMoviesPerPage } = this.props;
     const warningText = isFetched ? 'No films found for this request...' : 'Please, select your desired film.. ';
+    console.log(changePage, changeMoviesPerPage);
     return (
       <MainWrapper>
         {isFetched && movies.length
@@ -50,8 +51,8 @@ class Main extends Component {
             <Pagination
               paginationData={this.getPagesArray()}
               currentPage={currentPage}
-              changePageHandler
-              changePerPageHandler
+              changePageHandler= {changePage}
+              changePerPageHandler={changeMoviesPerPage}
             />
             <Films
               films={movies}
@@ -59,8 +60,8 @@ class Main extends Component {
             <Pagination
               paginationData={this.getPagesArray()}
               currentPage={currentPage}
-              changePageHandler
-              changePerPageHandler
+              changePageHandler = {changePage}
+              changePerPageHandler={changeMoviesPerPage}
             />
               </Fragment>
           )
@@ -77,7 +78,7 @@ export default connect(({movies, search})=>({
     total: movies.total,
     currentPage: search.currentPage,
     moviesPerPage: search.moviesPerPage,
-}))(Main);
+}), { changePage, changeMoviesPerPage })(Main);
 
 Main.propTypes = {
   searched: PropTypes.bool,

@@ -16,7 +16,7 @@ const RadioButton = ({
       name={inputName}
       value={inputValue}
       id={inputId}
-      onChange={(evt) => handlerChange(evt.target.id)} />
+      onChange={(evt) => handlerChange(evt.target.id, evt.target.value)} />
     <RadioLabel
       htmlFor={inputId}
       active={filtered === inputId}

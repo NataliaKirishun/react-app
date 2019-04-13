@@ -3,6 +3,8 @@ import {
     TOGGLE_SEARCH_BY,
     TOGGLE_SORT_BY,
     TOGGLE_SORT_ORDER,
+    CHANGE_PAGE,
+    CHANGE_ITEMS_PER_PAGE,
 } from '../constants';
 
 const initialState = {
@@ -15,7 +17,7 @@ const initialState = {
     term: '',
 };
 
-const search = (state=initialState, { type, term, searchBy, sortBy, sortOrder }) => {
+const search = (state=initialState, { type, term, searchBy, sortBy, sortOrder, currentPage, moviesPerPage }) => {
 
     switch(type){
         case SAVE_TERM :
@@ -38,6 +40,18 @@ const search = (state=initialState, { type, term, searchBy, sortBy, sortOrder })
                 ...state,
                 sortOrder,
             }
+         case CHANGE_PAGE : {
+            return {
+                ...state,
+                currentPage,
+            }
+         }
+         case CHANGE_ITEMS_PER_PAGE : {
+            return {
+                ...state,
+                moviesPerPage,
+            }
+         }
         default:
             return state;
 
