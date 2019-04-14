@@ -5,63 +5,39 @@ import PropTypes from 'prop-types';
 import EmptyResults from '../../components/EmptyResults/EmptyResults';
 import Films from '../../components/Films/Films';
 import Pagination from '../../common/Components/Pagination/Pagination';
-import {changePage, changeMoviesPerPage} from '../../actions';
+import {changePageHandler, changeMoviesPerPageHandler, fetchMovie} from '../../actions';
 
 class Main extends Component {
 
-    getPagesArray(){
-         const { albumClickHandler, movies, isFetched, total, currentPage, moviesPerPage } = this.props;
-         const pagesCount = Math.ceil(total/moviesPerPage);
-         let startPage;
-         let lastPage;
-         let pagesArray=[];
-         let firstPageIsShown;
-         let lastPageIsShown;
-         if (currentPage<=5) {
-            startPage = 1;
-            lastPage = Math.min(Math.max(currentPage + 2, 5),pagesCount);
-            firstPageIsShown = false;
-            lastPageIsShown = (pagesCount>=5)? true : false;
-         } else if (currentPage>=pagesCount-3) {
-            startPage = currentPage-2;
-            lastPage= pagesCount
-            firstPageIsShown= true;
-            lastPageIsShown= false;
-         } else {
-            startPage=currentPage-2;
-            lastPage=currentPage+2;
-            firstPageIsShown= true;
-            lastPageIsShown= true;
-         }
-         for (let i=startPage; i<=lastPage; i++) {
-            pagesArray.push(i);
-         }
-         return { pagesArray,pagesCount, firstPageIsShown, lastPageIsShown, moviesPerPage };
-    }
-
   render() {
-    const { albumClickHandler, movies, isFetched, total, currentPage, moviesPerPage, changePage,changeMoviesPerPage } = this.props;
+    const { movies, isFetched, total, currentPage, moviesPerPage, changePageHandler,changeMoviesPerPageHandler, fetchMovie } = this.props;
     const warningText = isFetched ? 'No films found for this request...' : 'Please, select your desired film.. ';
-    console.log(changePage, changeMoviesPerPage);
+    const arrayOfPages = Array(Math.ceil(total/moviesPerPage)).fill(1).map((v, i) => i + 1);
+    const arrayOfPerPages = [12, 24, 48, 96];
+    console.log(moviesPerPage);
     return (
       <MainWrapper>
         {isFetched && movies.length
           ? (
           <Fragment>
             <Pagination
-              paginationData={this.getPagesArray()}
+              arrayOfPages={arrayOfPages}
+              arrayOfPerPages = {arrayOfPerPages}
               currentPage={currentPage}
-              changePageHandler= {changePage}
-              changePerPageHandler={changeMoviesPerPage}
+              moviesPerPage={moviesPerPage}
+              changePageHandler= {changePageHandler}
+              changePerPageHandler={changeMoviesPerPageHandler}
             />
             <Films
               films={movies}
-              albumClickHandler={albumClickHandler} />
+              albumClickHandler={fetchMovie} />
             <Pagination
-              paginationData={this.getPagesArray()}
+              arrayOfPages={arrayOfPages}
+              arrayOfPerPages = {arrayOfPerPages}
               currentPage={currentPage}
-              changePageHandler = {changePage}
-              changePerPageHandler={changeMoviesPerPage}
+              moviesPerPage={moviesPerPage}
+              changePageHandler = {changePageHandler}
+              changePerPageHandler={changeMoviesPerPageHandler}
             />
               </Fragment>
           )
@@ -78,7 +54,7 @@ export default connect(({movies, search})=>({
     total: movies.total,
     currentPage: search.currentPage,
     moviesPerPage: search.moviesPerPage,
-}), { changePage, changeMoviesPerPage })(Main);
+}), { changePageHandler, changeMoviesPerPageHandler, fetchMovie })(Main);
 
 Main.propTypes = {
   searched: PropTypes.bool,

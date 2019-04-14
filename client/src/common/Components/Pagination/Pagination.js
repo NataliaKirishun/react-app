@@ -4,24 +4,11 @@ import Theme from '../../Theme/Theme';
 import Arrow from '../Arrow/Arrow';
 import RadioButton from '../RadioButton/RadioButton';
 
-const Pagination = ({ paginationData, currentPage, changePageHandler, changePerPageHandler})=> (
+const Pagination = ({ arrayOfPages, arrayOfPerPages, currentPage, moviesPerPage, changePageHandler, changePerPageHandler})=> { console.log(currentPage, moviesPerPage); return(
     <PaginationWrapper>
         <PagesWrapper>
-            {paginationData.firstPageIsShown
-            ? (
-              <Fragment>
-                <Arrow left />
-                <RadioButton
-                inputName='pagination'
-                inputValue={1}
-                inputId='item1'
-                filtered={'item'+currentPage}
-                handlerChange={changePageHandler}
-                >1</RadioButton>
-                <span>...</span>
-            </Fragment> )
-            : null }
-            { paginationData.pagesArray.map( item => <RadioButton
+            <Arrow left />
+            { arrayOfPages.map( item => <RadioButton
             inputName='pagination'
             inputValue={item}
             inputId={'item'+item}
@@ -29,32 +16,20 @@ const Pagination = ({ paginationData, currentPage, changePageHandler, changePerP
             handlerChange={changePageHandler}
             underline
             >{item}</RadioButton> )}
-            {paginationData.lastPageIsShown
-            ? ( <Fragment>
-                <span>...</span>
-                <RadioButton
-                inputName='pagination'
-                inputValue={paginationData.pagesCount}
-                inputId={'item'+paginationData.pagesCount}
-                filtered={'item'+currentPage}
-                handlerChange={changePageHandler}>
-                {paginationData.pagesCount}</RadioButton>
-             </Fragment>)
-              : null }
-               <Arrow right/>
+            <Arrow right/>
         </PagesWrapper>
         <ItemsPerPageWrapper>
-            {[10,20,40,80].map(item=><RadioButton
-                                       inputName={'perPage'+item}
-                                       inputValue={item}
-                                       inputId={'perPage'+item}
-                                       filtered={'perPage'+paginationData.moviesPerPage}
-                                       handlerChange={changePerPageHandler}
-                                       underline>{item}</RadioButton>
+            {arrayOfPerPages.map(item=><RadioButton
+                inputName='perPageCount'
+                inputValue={item}
+                inputId={'perPage'+ item}
+                filtered={'perPage'+ moviesPerPage}
+                handlerChange={changePerPageHandler}
+                underline>{item}</RadioButton>
             )}
             </ItemsPerPageWrapper>
     </PaginationWrapper>
-);
+)};
 
 export default Pagination;
 

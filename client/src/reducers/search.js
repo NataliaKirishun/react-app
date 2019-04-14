@@ -5,11 +5,12 @@ import {
     TOGGLE_SORT_ORDER,
     CHANGE_PAGE,
     CHANGE_ITEMS_PER_PAGE,
+    CHANGE_OFFSET,
 } from '../constants';
 
 const initialState = {
     currentPage: 1,
-    moviesPerPage: 10,
+    moviesPerPage: 12,
     searchBy: 'title',
     sortBy: 'release_date',
     sortOrder: 'asc',
@@ -18,7 +19,6 @@ const initialState = {
 };
 
 const search = (state=initialState, { type, term, searchBy, sortBy, sortOrder, currentPage, moviesPerPage }) => {
-
     switch(type){
         case SAVE_TERM :
             return {
@@ -50,6 +50,12 @@ const search = (state=initialState, { type, term, searchBy, sortBy, sortOrder, c
             return {
                 ...state,
                 moviesPerPage,
+            }
+         }
+         case CHANGE_OFFSET : {
+            return {
+                ...state,
+                offset:(state.currentPage-1)*state.moviesPerPage,
             }
          }
         default:

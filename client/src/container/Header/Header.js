@@ -76,8 +76,9 @@ state={
   }
 }
 
-export default connect( ({ movies, search }) => ({
+export default connect( ({ movies, movie,  search }) => ({
   total: movies.total,
+  activeFilm: movie.activeFilm,
   currentPage: search.currentPage,
   offset: search.offset,
   moviesPerPage: search.moviesPerPage,
