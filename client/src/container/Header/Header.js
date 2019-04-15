@@ -5,78 +5,99 @@ import PropTypes from 'prop-types';
 import Cockpit from '../../components/Cockpit/Cockpit';
 import Detail from '../../components/Detail/Detail';
 import Search from '../../components/Search/Search';
-import { fetchMovies, toggleSearchBy, toggleSortByHandler, toggleSortDirectionHandler, searchSubmit } from '../../actions';
-
+import {
+  toggleSearchBy, searchButtonHandler, toggleSortBy, fetchMovies, saveTerm, toggleSortOrder,
+} from '../../actions';
 
 class Header extends Component {
-
-state={
+  state={
     term: '',
-}
+  };
 
   inputChangeHandler = ({ target: { value } }) => {
     this.setState({
-        term: value
+      term: value,
     });
   }
 
   toggleSortDirectionHandler = () => {
-    const { sortOrder, toggleSortDirectionHandler } = this.props;
-      const sorted = sortOrder === 'asc' ? 'desc' : 'asc';
-      toggleSortDirectionHandler(sorted);
+    const {
+      sortOrder, toggleSortOrder, fetchMovies, term, searchBy, sortBy, offset, moviesPerPage,
+    } = this.props;
+    const sorted = sortOrder === 'asc' ? 'desc' : 'asc';
+    toggleSortOrder(sorted);
+    if (term) {
+      fetchMovies(searchBy, sortBy, sorted, term, offset, moviesPerPage);
+    }
   }
 
   formSubmitHandler = (e) => {
     e.preventDefault();
-    const {term}=this.state;
-    const { searchSubmit } = this.props;
-    searchSubmit(term);
+    const { term } = this.state;
+    const {
+      saveTerm, fetchMovies, searchBy, sortBy, sortOrder, offset, moviesPerPage,
+    } = this.props;
+    saveTerm(term);
+    fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    this.setState({
+      term: '',
+    });
+  }
+
+  toggleSortByHandler = (sortBy) => {
+    const {
+      toggleSortBy, fetchMovies, searchBy, sortOrder, term, offset, moviesPerPage,
+    } = this.props;
+    toggleSortBy(sortBy);
+    if (term) {
+      fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    }
   }
 
   render() {
     const {
-    activeFilm,
-    searchButtonHandler,
-    total,
-    searchBy,
-    sortBy,
-    sortOrder,
-    term,
-    toggleSearchBy,
-    toggleSortBy,
-    toggleSortByHandler} = this.props;
-
+      activeFilm,
+      total,
+      searchBy,
+      sortBy,
+      sortOrder,
+      toggleSearchBy,
+      searchButtonHandler,
+    } = this.props;
     return (
-    <Fragment>
-      <HeaderWrapper>
-        {activeFilm
-          ? (
-            <Detail
-              targetFilm={activeFilm}
-              searchButtonHandler={searchButtonHandler} />
-          )
-          : (
-            <Search
-              searchBy={searchBy}
-              inputChangeHandler={this.inputChangeHandler}
-              toggleSearchBy={toggleSearchBy}
-              formSubmitHandler={this.formSubmitHandler}
-            />
-          )
+      <Fragment>
+        <HeaderWrapper>
+          {
+          activeFilm
+            ? (
+              <Detail
+                targetFilm={activeFilm}
+                searchButtonHandler={searchButtonHandler} />
+            )
+            : (
+              <Fragment>
+                <Search
+                  searchBy={searchBy}
+                  inputChangeHandler={this.inputChangeHandler}
+                  toggleSearchBy={toggleSearchBy}
+                  formSubmitHandler={this.formSubmitHandler}
+                />
+                <Cockpit
+                  sortBy={sortBy}
+                  sortOrder={sortOrder}
+                  toggleSortBy={this.toggleSortByHandler}
+                  toggleSortDirection={this.toggleSortDirectionHandler}
+                  filmsCount={total} />
+              </Fragment>
+            )
         }
-      </HeaderWrapper>
-      <Cockpit
-        sortBy={sortBy}
-        sortOrder={sortOrder}
-        toggleSortBy={toggleSortByHandler}
-        toggleSortDirection = {this.toggleSortDirectionHandler}
-        filmsCount={total} />
-        </Fragment>
+        </HeaderWrapper>
+      </Fragment>
     );
   }
 }
 
-export default connect( ({ movies, movie,  search }) => ({
+export default connect(({ movies, movie, search }) => ({
   total: movies.total,
   activeFilm: movie.activeFilm,
   currentPage: search.currentPage,
@@ -85,14 +106,27 @@ export default connect( ({ movies, movie,  search }) => ({
   searchBy: search.searchBy,
   sortBy: search.sortBy,
   sortOrder: search.sortOrder,
-  term: search.term
+  term: search.term,
 }),
-{ toggleSearchBy, toggleSortByHandler, toggleSortDirectionHandler, searchSubmit })(Header);
+{
+  toggleSearchBy, searchButtonHandler, toggleSortBy, fetchMovies, saveTerm, toggleSortOrder,
+})(Header);
 
 Header.propTypes = {
-  activeFilm: PropTypes.shape({}),
-  searchFilmsHandler: PropTypes.func,
+  sortOrder: PropTypes.string,
+  total: PropTypes.number,
   searchButtonHandler: PropTypes.func,
+  sortBy: PropTypes.string,
+  searchBy: PropTypes.string,
+  toggleSearchBy: PropTypes.func,
+  toggleSortBy: PropTypes.func,
+  toggleSortOrder: PropTypes.func,
+  fetchMovies: PropTypes.func,
+  saveTerm: PropTypes.func,
+  activeFilm: PropTypes.shape(),
+  term: PropTypes.string,
+  offset: PropTypes.number,
+  moviesPerPage: PropTypes.string,
 };
 
 const HeaderWrapper = styled.header`

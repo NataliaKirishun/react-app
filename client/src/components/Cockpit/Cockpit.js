@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import RadioButton from '../../common/Components/RadioButton/RadioButton';
-import Button from '../../common/Components/Button/Button';
 import Arrow from '../../common/Components/Arrow/Arrow';
 import Theme from '../../common/Theme/Theme';
 
-const Cockpit = ({ sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCount }) => {
+const Cockpit = ({
+  sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCount,
+}) => {
   return (
     <Background>
       <CockpitWrapper>
@@ -19,24 +20,24 @@ const Cockpit = ({ sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCo
           </span>
         </div>
         <SortWrapper>
-        <form>
-          <span>Sort by</span>
-          <RadioButton
-            inputName="sort"
-            inputValue="release date"
-            inputId="release_date"
-            filtered={sortBy}
-            handlerChange={toggleSortBy}
-            transparent />
-          <RadioButton
-            inputName="sort"
-            inputValue="rating"
-            inputId="vote_average"
-            filtered={sortBy}
-            handlerChange={toggleSortBy}
-            transparent />
-        </form>
-        <Arrow onClick={toggleSortDirection} down={sortOrder === 'desc'} />
+          <form>
+            <span>Sort by</span>
+            <RadioButton
+              inputName="sort"
+              inputValue="release date"
+              inputId="release_date"
+              filtered={sortBy}
+              handlerChange={toggleSortBy}
+              transparent />
+            <RadioButton
+              inputName="sort"
+              inputValue="rating"
+              inputId="vote_average"
+              filtered={sortBy}
+              handlerChange={toggleSortBy}
+              transparent />
+          </form>
+          <Arrow onClick={toggleSortDirection} down={sortOrder === 'desc'} />
         </SortWrapper>
       </CockpitWrapper>
     </Background>
@@ -46,11 +47,11 @@ const Cockpit = ({ sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCo
 export default Cockpit;
 
 Cockpit.propTypes = {
-  sortBy: PropTypes.string.isRequired,
-  sortOrder: PropTypes.string.isRequired,
-  toggleSortBy: PropTypes.func.isRequired,
-  toggleSortDirection: PropTypes.func.isRequired,
-  filmsCount: PropTypes.number.isRequired,
+  sortBy: PropTypes.string,
+  sortOrder: PropTypes.string,
+  toggleSortBy: PropTypes.func,
+  toggleSortDirection: PropTypes.func,
+  filmsCount: PropTypes.number,
 };
 
 const Background = styled.div` 
@@ -69,5 +70,3 @@ const CockpitWrapper = styled.div`
 const SortWrapper = styled.div`
     display: flex;
 `;
-
-

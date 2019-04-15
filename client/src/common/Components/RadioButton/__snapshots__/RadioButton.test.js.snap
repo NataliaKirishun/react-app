@@ -23,7 +23,7 @@ exports[`RadioButton Snapshot RadioButton Component should render radio button c
     value="radio button"
   />
   <styled.label
-    active={true}
+    active={false}
     htmlFor="radioButton"
     id="active"
   >

@@ -1,11 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Theme from '../../Theme/Theme';
 
-const Arrow = ( { ...props } ) => (
-    <ArrowWrapper {...props} >
-        <i className="fas fa-arrow-up"></i>
-    </ArrowWrapper>
+const Arrow = ({ ...props }) => (
+  <ArrowWrapper {...props}>
+    <i className="fas fa-arrow-up" />
+  </ArrowWrapper>
 );
 
 const ArrowWrapper = styled.span`

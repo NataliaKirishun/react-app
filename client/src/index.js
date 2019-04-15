@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import App from './container/App/App';
 import './style.less';
-import { Provider } from 'react-redux';
-import store from "./store/store";
-
+import {
+  store, persistor,
+} from './store/store';
 
 // if (process.env.NODE_ENV === 'production') {
 //
@@ -15,7 +17,10 @@ import store from "./store/store";
 // }
 
 ReactDOM.render(
+  (
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <App />
-    </Provider>
-    , document.getElementById('root'));
+      </PersistGate>
+    </Provider>),
+  document.getElementById('root') || document.createElement('div'));

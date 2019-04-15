@@ -13,27 +13,32 @@ exports[`Cockpit Snapshot Cockpit Component should render correctly with given p
          movies found
       </span>
     </div>
-    <form>
-      <span>
-        Sort by
-      </span>
-      <RadioButton
-        filtered="release date"
-        handlerChange={[MockFunction]}
-        inputId="release"
-        inputName="sort"
-        inputValue="release date"
-        transparent={true}
+    <styled.div>
+      <form>
+        <span>
+          Sort by
+        </span>
+        <RadioButton
+          filtered="release date"
+          handlerChange={[MockFunction]}
+          inputId="release_date"
+          inputName="sort"
+          inputValue="release date"
+          transparent={true}
+        />
+        <RadioButton
+          filtered="release date"
+          handlerChange={[MockFunction]}
+          inputId="vote_average"
+          inputName="sort"
+          inputValue="rating"
+          transparent={true}
+        />
+      </form>
+      <Arrow
+        down={false}
       />
-      <RadioButton
-        filtered="release date"
-        handlerChange={[MockFunction]}
-        inputId="rating"
-        inputName="sort"
-        inputValue="rating"
-        transparent={true}
-      />
-    </form>
+    </styled.div>
   </styled.div>
 </styled.div>
 `;

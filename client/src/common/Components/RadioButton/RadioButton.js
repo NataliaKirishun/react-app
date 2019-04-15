@@ -19,6 +19,7 @@ const RadioButton = ({
       onChange={(evt) => handlerChange(evt.target.id, evt.target.value)} />
     <RadioLabel
       htmlFor={inputId}
+      id={filtered === inputValue ? 'active' : undefined}
       active={filtered === inputId}
       {...props}>
       {inputValue}
