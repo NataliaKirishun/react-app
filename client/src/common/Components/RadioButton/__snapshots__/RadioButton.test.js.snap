@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButton Snapshot RadioButton Component should render correctly with no props 1`] = `
+<Fragment>
+  <styled.input
+    onChange={[Function]}
+    type="radio"
+  />
+  <styled.label
+    active={true}
+    id="active"
+  />
+</Fragment>
+`;
+
+exports[`RadioButton Snapshot RadioButton Component should render radio button correctly with given props 1`] = `
+<Fragment>
+  <styled.input
+    id="radioButton"
+    name="test_button"
+    onChange={[Function]}
+    type="radio"
+    value="radio button"
+  />
+  <styled.label
+    active={true}
+    htmlFor="radioButton"
+    id="active"
+  >
+    radio button
+  </styled.label>
+</Fragment>
+`;

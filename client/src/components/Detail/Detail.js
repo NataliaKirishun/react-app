@@ -1,38 +1,54 @@
-import React from 'react'
-import styled, {css} from 'styled-components'
-import Theme from '../../common/Theme/Theme'
-import Logo from '../../common/Components/Logo'
-import Button from '../../common/Components/Button'
-import HeaderBackground from '../../common/Components/HeaderBackground'
-import HeaderWrapper from '../../common/Components/HeaderWrapper'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import Theme from '../../common/Theme/Theme';
+import Logo from '../../common/Components/Logo/Logo';
+import Button from '../../common/Components/Button/Button';
+import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
+import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 
-const Detail =  ({targetFilm, searchButtonHandler}) => {
-    return(
+const Detail = ({ targetFilm, searchButtonHandler }) => {
+  return (
     <HeaderBackground>
-        <HeaderWrapper>
-            <Container>
-                <Logo/>
-                <Button onClick={()=>searchButtonHandler()} white>Search</Button>
-            </Container>
-            <Container>
-                <PosterWrapper>
-                    <Poster src={targetFilm.poster_path}/>
-                </PosterWrapper>
-                <InfoWrapper>
-                    <Title>{targetFilm.title}</Title>
-                    <Info>{targetFilm.genres.join(', ')}</Info>
-                    <div>
-                        <Info bold>{targetFilm.release_date.split('-')[0]}</Info>
-                        <Info bold>{targetFilm.runtime} min</Info>
-                    </div>
-                    <Info>{targetFilm.overview}</Info>
-                </InfoWrapper>
-            </Container>
-        </HeaderWrapper>
+      <HeaderWrapper>
+        <Container>
+          <Logo />
+          <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
+        </Container>
+        <Container>
+          <PosterWrapper>
+            <Poster src={targetFilm.poster_path} />
+          </PosterWrapper>
+          <InfoWrapper>
+            <Title>{targetFilm.title}</Title>
+            <Info>
+              {targetFilm.genres.join(', ')}
+            </Info>
+            <div>
+              <Info bold>
+                {targetFilm.release_date.split('-')[0]}
+              </Info>
+              <Info bold>
+                {targetFilm.runtime}
+                {'min'}
+              </Info>
+            </div>
+            <Info>
+              {targetFilm.overview}
+            </Info>
+          </InfoWrapper>
+        </Container>
+      </HeaderWrapper>
     </HeaderBackground>
-)};
+  );
+};
 
-export default  Detail;
+export default Detail;
+
+Detail.propTypes = {
+  targetFilm: PropTypes.shape({}).isRequired,
+  searchButtonHandler: PropTypes.func.isRequired,
+};
 
 const Container = styled.div`
     display: flex;
@@ -50,7 +66,9 @@ const PosterWrapper = styled.div`
     padding-top: 22.5%;
 `;
 
-const InfoWrapper = styled.div`
+const InfoWrapper = styled.div.attrs({
+  className: 'film-info-wrapper',
+})`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -78,6 +96,5 @@ const Info = styled.span`
     
      ${props => props.bold && css`
         font-weight: 800;
-    `}  
+    `}
 `;
-

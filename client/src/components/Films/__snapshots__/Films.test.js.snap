@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Films Snapshot Films Component should render correctly with given props 1`] = `
+<div
+  class="sc-EHOje hkQRmw"
+>
+  <div
+    class="sc-bZQynM gSRbGQ"
+  >
+    <a
+      class="sc-bdVaJa film-link dQMKLa"
+    >
+      <img
+        class="sc-bwzfXH ifbPgJ"
+        src="https://image.tmdb.org/t/p/w500/xY7k2M9eElJnLSYwqY85Xon5z6m.jpg"
+      />
+      <div
+        class="sc-htpNat eUMQJL"
+      >
+        <h3
+          class="sc-bxivhb gEscEi"
+        >
+          Papillon
+        </h3>
+        <span>
+          Crime, Drama
+        </span>
+        <span
+          class="sc-ifAKCX cCwMba"
+        >
+          1973
+        </span>
+      </div>
+    </a>
+    <a
+      class="sc-bdVaJa film-link dQMKLa"
+    >
+      <img
+        class="sc-bwzfXH ifbPgJ"
+        src="https://image.tmdb.org/t/p/w500/2VDPeoPJ2bKdmfuJxxCktx1hr5g.jpg"
+      />
+      <div
+        class="sc-htpNat eUMQJL"
+      >
+        <h3
+          class="sc-bxivhb gEscEi"
+        >
+          This Is Spinal Tap
+        </h3>
+        <span>
+          Comedy, Music
+        </span>
+        <span
+          class="sc-ifAKCX cCwMba"
+        >
+          1984
+        </span>
+      </div>
+    </a>
+  </div>
+</div>
+`;

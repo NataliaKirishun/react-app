@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search Component Snapshot Search Component should render correctly with given props 1`] = `
+<styled.div>
+  <styled.div>
+    <Logo />
+    <styled.h2
+      main={true}
+    >
+      find your movie
+    </styled.h2>
+    <styled.form
+      onSubmit={[MockFunction]}
+    >
+      <styled.div>
+        <styled.input
+          autoFocus={true}
+          id="searchInput"
+          onChange={[Function]}
+          placeholder="Search here..."
+          required={true}
+        />
+        <styled.label
+          htmlFor="searchInput"
+        >
+          <i
+            className="fas fa-level-down-alt"
+          />
+        </styled.label>
+      </styled.div>
+      <styled.div>
+        <styled.h2
+          small={true}
+        >
+          search by
+        </styled.h2>
+        <RadioButton
+          colored={true}
+          filtered="title"
+          handlerChange={[MockFunction]}
+          inputId="titleChoice"
+          inputName="searchBy"
+          inputValue="title"
+        />
+        <RadioButton
+          colored={true}
+          filtered="title"
+          handlerChange={[MockFunction]}
+          inputId="genreChoice"
+          inputName="searchBy"
+          inputValue="genre"
+        />
+        <styled.button
+          id="searchBtn"
+          red={true}
+          type="submit"
+        >
+          search
+        </styled.button>
+      </styled.div>
+    </styled.form>
+  </styled.div>
+</styled.div>
+`;

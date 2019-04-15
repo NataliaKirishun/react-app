@@ -1,16 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
-import Theme from '../../common/Theme/Theme'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Theme from '../../common/Theme/Theme';
 
-const EmptyResults = ({text}) => (
-    <EmptyBackground>
-        <EmptyContainer>
-            <EmptyText>{text}</EmptyText>
-        </EmptyContainer>
-    </EmptyBackground>
+const EmptyResults = ({ text }) => (
+  <EmptyBackground>
+    <EmptyContainer>
+      <EmptyText>{text}</EmptyText>
+    </EmptyContainer>
+  </EmptyBackground>
 );
 
 export default EmptyResults;
+
+EmptyResults.propTypes = {
+  text: PropTypes.string.isRequired,
+};
 
 const EmptyBackground = styled.div`
     width: 100%;
@@ -23,10 +28,11 @@ const EmptyContainer = styled.div`
     margin: 0 auto;  
 `;
 
-const EmptyText = styled.p`
+const EmptyText = styled.p.attrs({
+  className: 'empty-text',
+})`
    color: ${Theme.colors.red}; 
    text-align: center;
    vertical-align: middle;
    font-size: 30px;
 `;
-

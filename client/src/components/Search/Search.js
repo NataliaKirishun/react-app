@@ -1,54 +1,68 @@
-import React from 'react'
-import styled, {css} from 'styled-components'
-import Logo from "../../common/Components/Logo"
-import RadioButton from "../../common/Components/RadioButton"
-import Button from "../../common/Components/Button"
-import Theme from '../../common/Theme/Theme'
-import HeaderBackground from '../../common/Components/HeaderBackground'
-import HeaderWrapper from '../../common/Components/HeaderWrapper'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import Logo from '../../common/Components/Logo/Logo';
+import RadioButton from '../../common/Components/RadioButton/RadioButton';
+import Button from '../../common/Components/Button/Button';
+import Theme from '../../common/Theme/Theme';
+import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
+import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 
-const Search = ({searchBy, inputChangeHandler, toggleSearchBy,formSubmitHandler}) => {
-    return (
-        <HeaderBackground>
-            <HeaderWrapper>
-                <Logo/>
-                <Title main>find your movie</Title>
-                <Form onSubmit={formSubmitHandler}>
-                    <InputWrapper>
-                        <Input
-                            id="searchInput"
-                            placeholder="Search here..."
-                            onChange={(evt)=> inputChangeHandler(evt)}
-                            required/>
-                        <LabelArrow htmlFor="searchInput" ><i className="fas fa-level-down-alt"></i></LabelArrow>
-                    </InputWrapper>
-                    <SearchWrapper>
-                        <Title small>search by</Title>
-                        <RadioButton
-                            inputName="searchBy"
-                            inputValue="title"
-                            inputId="titleChoice"
-                            filtered={searchBy}
-                            handlerChange={toggleSearchBy}
-                            colored/>
-                        <RadioButton
-                            inputName="searchBy"
-                            inputValue="genre"
-                            inputId="genreChoice"
-                            filtered={searchBy}
-                            handlerChange={toggleSearchBy}
-                            colored/>
-                        <Button type="submit" red>search</Button>
-                    </SearchWrapper>
-                </Form>
-            </HeaderWrapper>
-        </HeaderBackground>
-    )
+const Search = ({
+  searchBy,
+  inputChangeHandler,
+  toggleSearchBy,
+  formSubmitHandler,
+}) => {
+  return (
+    <HeaderBackground>
+      <HeaderWrapper>
+        <Logo />
+        <Title main>find your movie</Title>
+        <Form onSubmit={formSubmitHandler}>
+          <InputWrapper>
+            <Input
+              id="searchInput"
+              placeholder="Search here..."
+              onChange={(evt) => inputChangeHandler(evt)}
+              required
+              autoFocus />
+            <LabelArrow htmlFor="searchInput">
+              <i className="fas fa-level-down-alt" />
+            </LabelArrow>
+          </InputWrapper>
+          <SearchWrapper>
+            <Title small>search by</Title>
+            <RadioButton
+              inputName="searchBy"
+              inputValue="title"
+              inputId="titleChoice"
+              filtered={searchBy}
+              handlerChange={toggleSearchBy}
+              colored />
+            <RadioButton
+              inputName="searchBy"
+              inputValue="genre"
+              inputId="genreChoice"
+              filtered={searchBy}
+              handlerChange={toggleSearchBy}
+              colored />
+            <Button id="searchBtn" type="submit" red>search</Button>
+          </SearchWrapper>
+        </Form>
+      </HeaderWrapper>
+    </HeaderBackground>
+  );
 };
 
 export default Search;
 
-
+Search.propTypes = {
+  searchBy: PropTypes.string.isRequired,
+  inputChangeHandler: PropTypes.func.isRequired,
+  toggleSearchBy: PropTypes.func.isRequired,
+  formSubmitHandler: PropTypes.func.isRequired,
+};
 
 const Title = styled.h2`
     color: ${Theme.colors.white};    
@@ -93,15 +107,9 @@ const LabelArrow = styled.label`
     transform: rotate(90deg);  
 `;
 
-const SearchWrapper = styled.div`
+const SearchWrapper = styled.div.attrs({
+  className: 'search-wrapper',
+})`
     display: flex;
     align-items: center;  
 `;
-
-
-
-
-
-
-
-
