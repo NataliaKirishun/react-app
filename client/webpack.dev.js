@@ -6,7 +6,9 @@ const webpack = require('webpack');
        mode: 'development',
        devtool: 'inline-source-map',
        devServer: {
-         contentBase: './dist'
+         contentBase: './dist',
+         hot: true,
+         historyApiFallback: true,
        },
          output: {
              filename: '[name].bundle.[hash].js'

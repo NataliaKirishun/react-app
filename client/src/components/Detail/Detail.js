@@ -9,44 +9,37 @@ import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 
 const Detail = ({ targetFilm, searchButtonHandler }) => {
   return (
-    <Fragment>
-      <HeaderBackground>
-        <HeaderWrapper>
-          <Container>
-            <Logo />
-            <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
-          </Container>
-          <Container>
-            <PosterWrapper>
-              <Poster src={targetFilm.poster_path} />
-            </PosterWrapper>
-            <InfoWrapper>
-              <Title>{targetFilm.title}</Title>
-              <Info>
-                {targetFilm.genres.join(', ')}
+    <HeaderBackground>
+      <HeaderWrapper>
+        <Container>
+          <Logo />
+          <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
+        </Container>
+        <Container>
+          <PosterWrapper>
+            <Poster src={targetFilm.poster_path} />
+          </PosterWrapper>
+          <InfoWrapper>
+            <Title>{targetFilm.title}</Title>
+            <Info>
+              {targetFilm.genres.join(', ')}
+            </Info>
+            <div>
+              <Info bold>
+                {targetFilm.release_date.split('-')[0]}
               </Info>
-              <div>
-                <Info bold>
-                  {targetFilm.release_date.split('-')[0]}
-                </Info>
-                <Info bold>
-                  {targetFilm.runtime}
-                  {'min'}
-                </Info>
-              </div>
-              <Info>
-                {targetFilm.overview}
+              <Info bold>
+                {targetFilm.runtime}
+                {'min'}
               </Info>
-            </InfoWrapper>
-          </Container>
-        </HeaderWrapper>
-      </HeaderBackground>
-      <GenreInfo>
-        <GenreInfoWrapper>
-          {`Films by  ${targetFilm.genres[0]}  genre`}
-        </GenreInfoWrapper>
-      </GenreInfo>
-    </Fragment>
+            </div>
+            <Info>
+              {targetFilm.overview}
+            </Info>
+          </InfoWrapper>
+        </Container>
+      </HeaderWrapper>
+    </HeaderBackground>
   );
 };
 
@@ -106,13 +99,3 @@ const Info = styled.span`
     `}
 `;
 
-const GenreInfo = styled.div`
-    width: 100%;
-    background-color: ${Theme.colors.grey};
-    padding: 10px 0;
-`;
-
-const GenreInfoWrapper = styled.div`
-    width: 80%;
-    margin: 0 auto;
-`;

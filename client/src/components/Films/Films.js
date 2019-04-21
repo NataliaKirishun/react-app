@@ -3,13 +3,30 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 import Film from '../Film/Film';
+import Pagination from '../../common/Components/Pagination/Pagination'
 
 
-const Films = ({ films, albumClickHandler }) => (
+const Films = ({ films, albumClickHandler, arrayOfPages, arrayOfPerPages, currentPage, moviesPerPage, changePageHandler, changePerPageHandler }) => (
   <FilmsBackground>
-    <FilmsWrapper>
-      {films.map((film) => <Film info={film} key={film.id} albumClickHandler={albumClickHandler} />)}
-    </FilmsWrapper>
+    <Pagination
+      arrayOfPages={arrayOfPages}
+      arrayOfPerPages={arrayOfPerPages}
+      currentPage={currentPage}
+      moviesPerPage={moviesPerPage}
+      changePageHandler={changePageHandler}
+      changePerPageHandler={changePerPageHandler}
+    />
+      <FilmsWrapper>
+        {films.map((film) => <Film info={film} key={film.id} albumClickHandler={albumClickHandler} />)}
+      </FilmsWrapper>
+    <Pagination
+      arrayOfPages={arrayOfPages}
+      arrayOfPerPages={arrayOfPerPages}
+      currentPage={currentPage}
+      moviesPerPage={moviesPerPage}
+      changePageHandler={changePageHandler}
+      changePerPageHandler={changePerPageHandler}
+    />
   </FilmsBackground>
 );
 
