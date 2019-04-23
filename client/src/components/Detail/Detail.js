@@ -1,53 +1,78 @@
-import React, { Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 import Logo from '../../common/Components/Logo/Logo';
-import Button from '../../common/Components/Button/Button';
 import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
 import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
+import { fetchMovie } from '../../actions';
 
-const Detail = ({ targetFilm, searchButtonHandler }) => {
-  return (
-    <HeaderBackground>
-      <HeaderWrapper>
-        <Container>
-          <Logo />
-          <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
-        </Container>
-        <Container>
-          <PosterWrapper>
-            <Poster src={targetFilm.poster_path} />
-          </PosterWrapper>
-          <InfoWrapper>
-            <Title>{targetFilm.title}</Title>
-            <Info>
-              {targetFilm.genres.join(', ')}
-            </Info>
-            <div>
-              <Info bold>
-                {targetFilm.release_date.split('-')[0]}
-              </Info>
-              <Info bold>
-                {targetFilm.runtime}
-                {'min'}
-              </Info>
-            </div>
-            <Info>
-              {targetFilm.overview}
-            </Info>
-          </InfoWrapper>
-        </Container>
-      </HeaderWrapper>
-    </HeaderBackground>
-  );
-};
+class Detail extends Component {
+  componentDidMount() {
+    const { match, fetchMovie } = this.props;
+    const { id } = match.params;
+    fetchMovie(id);
+  }
 
-export default Detail;
+  componentDidUpdate(prevProps) {
+    const { fetchMovie, match } = this.props;
+    if (match.params.id !== prevProps.match.params.id) {
+      const { id } = match.params;
+      fetchMovie(id);
+    }
+  }
+
+  render() {
+    const { targetFilm } = this.props;
+    if (!targetFilm) { return (<div>Loading</div>); }
+    return (
+      <HeaderBackground>
+        <HeaderWrapper>
+          <Container>
+            <Logo />
+            <ButtonLink to="/" id="backToSearch">Search</ButtonLink>
+          </Container>
+          <Container>
+            <PosterWrapper>
+              <Poster src={targetFilm.poster_path} />
+            </PosterWrapper>
+            <InfoWrapper>
+              <Title>{targetFilm.title}</Title>
+              <Info>
+                {targetFilm.genres.join(', ')}
+              </Info>
+              <div>
+                <Info bold>
+                  {targetFilm.release_date.split('-')[0]}
+                </Info>
+                <Info bold>
+                  {targetFilm.runtime}
+                  {'min'}
+                </Info>
+              </div>
+              <Info>
+                {targetFilm.overview}
+              </Info>
+            </InfoWrapper>
+          </Container>
+        </HeaderWrapper>
+      </HeaderBackground>
+    );
+  }
+}
+
+export default connect(({ movie }) => ({
+  targetFilm: movie.activeFilm,
+}), {
+  fetchMovie,
+})(Detail);
 
 Detail.propTypes = {
-  targetFilm: PropTypes.shape({}).isRequired,
-  searchButtonHandler: PropTypes.func.isRequired,
+  targetFilm: PropTypes.shape({}),
+  fetchMovie: PropTypes.func,
+  match: PropTypes.shape({}),
 };
 
 const Container = styled.div`
@@ -99,3 +124,10 @@ const Info = styled.span`
     `}
 `;
 
+const ButtonLink = styled(Link)`
+    background-color: ${Theme.colors.white};
+    color: ${Theme.colors.red};
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 6px;
+`;

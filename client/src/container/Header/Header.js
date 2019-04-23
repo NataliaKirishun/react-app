@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Cockpit from '../../components/Cockpit/Cockpit';
@@ -39,14 +38,11 @@ class Header extends Component {
     e.preventDefault();
     const { term } = this.state;
     const {
-      saveTerm, fetchMovies, searchBy, sortBy, sortOrder, offset, moviesPerPage,
+      saveTerm, fetchMovies, searchBy, sortBy, sortOrder, offset, moviesPerPage, history,
     } = this.props;
     saveTerm(term);
-    this.props.history.push(`/movies?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`);
+    history.push(`/movies?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`);
     fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
-    this.setState({
-      term: '',
-    });
   }
 
   toggleSortByHandler = (sortBy) => {
@@ -67,51 +63,30 @@ class Header extends Component {
       sortBy,
       sortOrder,
       toggleSearchBy,
-      searchButtonHandler,
     } = this.props;
     return (
       <Fragment>
         <HeaderWrapper>
-        <Switch>
-        <Route
-          exact
-          path="/"
-          render={() =>
-            <Search
-              searchBy={searchBy}
-              inputChangeHandler={this.inputChangeHandler}
-              toggleSearchBy={toggleSearchBy}
-              formSubmitHandler={this.formSubmitHandler}/>
-            } />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => <Search searchBy={searchBy} inputChangeHandler={this.inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={this.formSubmitHandler} />
+              } />
             <Route
               path="/movies"
-              render={() =>
-              <Search
-                searchBy={searchBy}
-                inputChangeHandler={this.inputChangeHandler}
-                toggleSearchBy={toggleSearchBy}
-                formSubmitHandler={this.formSubmitHandler}/>
+              render={() => <Search searchBy={searchBy} inputChangeHandler={this.inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={this.formSubmitHandler} />
               } />
-          <Route path="/detail/:id"
-            render = { () =>
-            < Detail
-              targetFilm={activeFilm}
-              searchButtonHandler={searchButtonHandler} />
-            } />
-              <Route render = { () => <ErrorHeader />}/>
-        </Switch>
-        <Switch>
-          <Route path="/movies"
-            render = { () => <Cockpit
-              sortBy={sortBy}
-              sortOrder={sortOrder}
-              toggleSortBy={this.toggleSortByHandler}
-              toggleSortDirection={this.toggleSortDirectionHandler}
-              filmsCount={total}/>
+            <Route path="/film/:id" component={Detail} />
+            <Route render={() => <ErrorHeader />} />
+          </Switch>
+          <Switch>
+            <Route
+              path="/movies"
+              render={() => <Cockpit sortBy={sortBy} sortOrder={sortOrder} toggleSortBy={this.toggleSortByHandler} toggleSortDirection={this.toggleSortDirectionHandler} filmsCount={total} />
               } />
-           <Route path="/detail"
-             render = { () => <GenreInfo />} />
-        </Switch>
+            <Route path="/film" render={() => <GenreInfo activeFilm={activeFilm} />} />
+          </Switch>
         </HeaderWrapper>
       </Fragment>
     );
@@ -121,7 +96,6 @@ class Header extends Component {
 export default withRouter(connect(({ movies, movie, search }) => ({
   total: movies.total,
   activeFilm: movie.activeFilm,
-  currentPage: search.currentPage,
   offset: search.offset,
   moviesPerPage: search.moviesPerPage,
   searchBy: search.searchBy,
@@ -136,7 +110,6 @@ export default withRouter(connect(({ movies, movie, search }) => ({
 Header.propTypes = {
   sortOrder: PropTypes.string,
   total: PropTypes.number,
-  searchButtonHandler: PropTypes.func,
   sortBy: PropTypes.string,
   searchBy: PropTypes.string,
   toggleSearchBy: PropTypes.func,
@@ -148,6 +121,7 @@ Header.propTypes = {
   term: PropTypes.string,
   offset: PropTypes.number,
   moviesPerPage: PropTypes.string,
+  history: PropTypes.shape(),
 };
 
 const HeaderWrapper = styled.header`

@@ -13,7 +13,7 @@ const application = (
   <BrowserRouter>
     <App />
   </BrowserRouter>
-)
+);
 
 
 ReactDOM.render(

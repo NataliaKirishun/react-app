@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 
-const GenreInfo = () => (
+const GenreInfo = ({ activeFilm }) => (
   <GenreInfoComponent>
     <GenreInfoWrapper>
-      {`Films by  .......... genre`}
+      Films by
+      {activeFilm ? activeFilm.genres[0] : '...'}
+      genre
     </GenreInfoWrapper>
   </GenreInfoComponent>
 );
 
 export default GenreInfo;
+
+GenreInfo.propTypes = {
+  activeFilm: PropTypes.string,
+};
 
 const GenreInfoComponent = styled.div`
     width: 100%;
