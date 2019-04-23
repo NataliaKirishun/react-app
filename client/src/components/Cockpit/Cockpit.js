@@ -2,12 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RadioButton from '../../common/Components/RadioButton/RadioButton';
+import Arrow from '../../common/Components/Arrow/Arrow';
 import Theme from '../../common/Theme/Theme';
 
-const Cockpit = ({ sortBy, toggleSortBy, filmsCount }) => {
+const Cockpit = ({
+  sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCount,
+}) => {
   return (
     <Background>
-      <Wrapper>
+      <CockpitWrapper>
         <div>
           <span id="filmsCount">
             {filmsCount}
@@ -16,24 +19,27 @@ const Cockpit = ({ sortBy, toggleSortBy, filmsCount }) => {
             {' movies found'}
           </span>
         </div>
-        <form>
-          <span>Sort by</span>
-          <RadioButton
-            inputName="sort"
-            inputValue="release date"
-            inputId="release"
-            filtered={sortBy}
-            handlerChange={toggleSortBy}
-            transparent />
-          <RadioButton
-            inputName="sort"
-            inputValue="rating"
-            inputId="rating"
-            filtered={sortBy}
-            handlerChange={toggleSortBy}
-            transparent />
-        </form>
-      </Wrapper>
+        <SortWrapper>
+          <form>
+            <span>Sort by</span>
+            <RadioButton
+              inputName="sort"
+              inputValue="release date"
+              inputId="release_date"
+              filtered={sortBy}
+              handlerChange={toggleSortBy}
+              transparent />
+            <RadioButton
+              inputName="sort"
+              inputValue="rating"
+              inputId="vote_average"
+              filtered={sortBy}
+              handlerChange={toggleSortBy}
+              transparent />
+          </form>
+          <Arrow onClick={toggleSortDirection} down={sortOrder === 'desc'} />
+        </SortWrapper>
+      </CockpitWrapper>
     </Background>
   );
 };
@@ -42,8 +48,10 @@ export default Cockpit;
 
 Cockpit.propTypes = {
   sortBy: PropTypes.string,
-  toggleSortBy: PropTypes.func.isRequired,
-  filmsCount: PropTypes.number.isRequired,
+  sortOrder: PropTypes.string,
+  toggleSortBy: PropTypes.func,
+  toggleSortDirection: PropTypes.func,
+  filmsCount: PropTypes.number,
 };
 
 const Background = styled.div` 
@@ -51,10 +59,14 @@ const Background = styled.div`
     background-color: ${Theme.colors.grey};    
 `;
 
-const Wrapper = styled.div`
+const CockpitWrapper = styled.div`
     display: flex;
     justify-content: space-around;
     width: 80%;
     margin: 0 auto;
     padding: 10px 0;
+`;
+
+const SortWrapper = styled.div`
+    display: flex;
 `;

@@ -38,7 +38,7 @@ exports[`Search Component Snapshot Search Component should render correctly with
           colored={true}
           filtered="title"
           handlerChange={[MockFunction]}
-          inputId="titleChoice"
+          inputId="title"
           inputName="searchBy"
           inputValue="title"
         />
@@ -46,7 +46,7 @@ exports[`Search Component Snapshot Search Component should render correctly with
           colored={true}
           filtered="title"
           handlerChange={[MockFunction]}
-          inputId="genreChoice"
+          inputId="genres"
           inputName="searchBy"
           inputValue="genre"
         />

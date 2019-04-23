@@ -16,11 +16,11 @@ const RadioButton = ({
       name={inputName}
       value={inputValue}
       id={inputId}
-      onChange={(evt) => handlerChange(evt)} />
+      onChange={(evt) => handlerChange(evt.target.id, evt.target.value)} />
     <RadioLabel
       htmlFor={inputId}
       id={filtered === inputValue ? 'active' : undefined}
-      active={filtered === inputValue}
+      active={filtered === inputId}
       {...props}>
       {inputValue}
     </RadioLabel>
@@ -37,7 +37,12 @@ const RadioLabel = styled.label`
   cursor: pointer;
   margin-left: 20px;    
   border-radius: 4px;
-  cursor: pointer;    
+  cursor: pointer;
+
+   ${props => props.underline && props.active && css`
+    color: ${Theme.colors.red};
+    text-decoration: underline;
+   `}
    
    ${props => props.colored && css`
         background-color: ${Theme.colors.medium_grey};

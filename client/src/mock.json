@@ -1,4 +1,4 @@
-{"data":[{
+[{
   "id":129,
   "title":"Spirited Away",
   "tagline":"",
@@ -129,7 +129,4 @@
     "revenue":102272727,
     "genres":["Comedy","Family","Fantasy"],
     "runtime":139
-  }],
-  "total":90,
-  "offset":0,
-  "limit":10}
+  }]

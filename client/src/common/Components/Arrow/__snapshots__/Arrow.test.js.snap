@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Arrow Snapshot Arrow Common Component should render correctly with no props 1`] = `
+<Arrow
+  modifiers={
+    Array [
+      "down",
+    ]
+  }
+>
+  <styled.span
+    modifiers={
+      Array [
+        "down",
+      ]
+    }
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "ksPSpM",
+            "rules": Array [
+              "
+
+    .fas {
+
+        margin-left: 20px;
+
+        ",
+              [Function],
+              "
+
+         ",
+              [Function],
+              "
+
+         ",
+              [Function],
+              "
+
+     }
+",
+            ],
+          },
+          "displayName": "styled.span",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "span",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      modifiers={
+        Array [
+          "down",
+        ]
+      }
+    >
+      <span
+        className="sc-bdVaJa ksPSpM"
+      >
+        <i
+          className="fas fa-arrow-up"
+        />
+      </span>
+    </StyledComponent>
+  </styled.span>
+</Arrow>
+`;

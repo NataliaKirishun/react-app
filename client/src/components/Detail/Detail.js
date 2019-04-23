@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Theme from '../../common/Theme/Theme';
@@ -9,37 +9,44 @@ import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 
 const Detail = ({ targetFilm, searchButtonHandler }) => {
   return (
-    <HeaderBackground>
-      <HeaderWrapper>
-        <Container>
-          <Logo />
-          <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
-        </Container>
-        <Container>
-          <PosterWrapper>
-            <Poster src={targetFilm.poster_path} />
-          </PosterWrapper>
-          <InfoWrapper>
-            <Title>{targetFilm.title}</Title>
-            <Info>
-              {targetFilm.genres.join(', ')}
-            </Info>
-            <div>
-              <Info bold>
-                {targetFilm.release_date.split('-')[0]}
+    <Fragment>
+      <HeaderBackground>
+        <HeaderWrapper>
+          <Container>
+            <Logo />
+            <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
+          </Container>
+          <Container>
+            <PosterWrapper>
+              <Poster src={targetFilm.poster_path} />
+            </PosterWrapper>
+            <InfoWrapper>
+              <Title>{targetFilm.title}</Title>
+              <Info>
+                {targetFilm.genres.join(', ')}
               </Info>
-              <Info bold>
-                {targetFilm.runtime}
-                {'min'}
+              <div>
+                <Info bold>
+                  {targetFilm.release_date.split('-')[0]}
+                </Info>
+                <Info bold>
+                  {targetFilm.runtime}
+                  {'min'}
+                </Info>
+              </div>
+              <Info>
+                {targetFilm.overview}
               </Info>
-            </div>
-            <Info>
-              {targetFilm.overview}
-            </Info>
-          </InfoWrapper>
-        </Container>
-      </HeaderWrapper>
-    </HeaderBackground>
+            </InfoWrapper>
+          </Container>
+        </HeaderWrapper>
+      </HeaderBackground>
+      <GenreInfo>
+        <GenreInfoWrapper>
+          {`Films by  ${targetFilm.genres[0]}  genre`}
+        </GenreInfoWrapper>
+      </GenreInfo>
+    </Fragment>
   );
 };
 
@@ -97,4 +104,15 @@ const Info = styled.span`
      ${props => props.bold && css`
         font-weight: 800;
     `}
+`;
+
+const GenreInfo = styled.div`
+    width: 100%;
+    background-color: ${Theme.colors.grey};
+    padding: 10px 0;
+`;
+
+const GenreInfoWrapper = styled.div`
+    width: 80%;
+    margin: 0 auto;
 `;
