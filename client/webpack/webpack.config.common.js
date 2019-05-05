@@ -1,20 +1,22 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
+const isDevMod = process.env.NODE_ENV === 'development';
+
 module.exports = {
-    entry: {
-        app: './src/index.js'
+    mode: process.env.NODE_ENV,
+    output: {
+      publicPath: '/',
+      filename: 'js/[name].js',
+      path: path.resolve(__dirname, '../public')
     },
     resolve: {
         extensions: ['*', '.js', '.jsx'],
+        alias: {
+          'react-dom': '@hot-loader/react-dom',
+        },
     },
-    output: {
-        publicPath: '/',
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
-    },
+
     module: {
         rules: [
             {
@@ -22,7 +24,7 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     "babel-loader",
-                    "eslint-loader",
+                    // "eslint-loader",
                 ],
             },
             {
@@ -57,12 +59,7 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            title: 'React application',
-            template: "./src/index.html",
-            inject: "body"
-        })
-    ],
+  plugins: [
+    isDevMod ? new webpack.NamedModulesPlugin() : new webpack.HashedModuleIdsPlugin(),
+  ],
 };
