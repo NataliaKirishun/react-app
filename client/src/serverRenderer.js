@@ -2,9 +2,10 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import Root from './Root';
+import configureStore from './store/configureStore';
 
 
-function renderHTML(html) {
+function renderHTML(html, preloadedState) {
   return `
       <!doctype html>
       <html>
@@ -19,6 +20,9 @@ function renderHTML(html) {
         </head>
         <body>
           <div id="root">${html}</div>
+          <script>
+            window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
+          </script>
           <script src="/js/main.js"></script>
         </body>
       </html>
@@ -27,17 +31,19 @@ function renderHTML(html) {
 
 export default function serverRenderer() {
   return (req, res) => {
+    const {store} = configureStore();
     const context = {};
 
-    const root = (
+    const renderRoot = () => (
       <Root
         context={context}
         location={req.url}
         Router={StaticRouter}
+        store={store}
       />
     );
 
-    const htmlString = renderToString(root);
+    renderToString(renderRoot());
 
     if (context.url) {
       res.writeHead(302, {
@@ -47,6 +53,9 @@ export default function serverRenderer() {
       return;
     };
 
-    res.send(renderHTML(htmlString));
+    const htmlString = renderToString(renderRoot());
+    const preloadedState = store.getState();
+
+    res.send(renderHTML(htmlString, preloadedState));
   };
 }

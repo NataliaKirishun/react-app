@@ -25,8 +25,3 @@
 //     </Provider>),
 //   document.getElementById('root') || document.createElement('div'));
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-//
-// ReactDOM.hydrate(<App />, document.getElementById('root'));
