@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 import Root from './Root';
 
 
@@ -26,7 +27,25 @@ function renderHTML(html) {
 
 export default function serverRenderer() {
   return (req, res) => {
-    const htmlString = renderToString(<Root />);
+    const context = {};
+
+    const root = (
+      <Root
+        context={context}
+        location={req.url}
+        Router={StaticRouter}
+      />
+    );
+
+    const htmlString = renderToString(root);
+
+    if (context.url) {
+      res.writeHead(302, {
+        Location: context.url,
+      });
+      res.end();
+      return;
+    };
 
     res.send(renderHTML(htmlString));
   };

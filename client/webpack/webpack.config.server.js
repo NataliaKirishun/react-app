@@ -14,11 +14,10 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.css$/,
         include: /src/,
         use: [
-          'css-loader',
-          'less-loader',
+          'css-loader'
         ],
       },
     ],

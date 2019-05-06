@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style.less';
+import { BrowserRouter } from 'react-router-dom';
+import './style.css';
 
 import Root from './Root';
 
 const root = (
-  <Root />
+  <Root
+    Router={BrowserRouter}
+  />
 );
 
 ReactDOM.hydrate(root, document.getElementById('root'));

@@ -21,12 +21,11 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.css$/,
         include: /src/,
         use: [
           isDevMod ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'less-loader',
+          'css-loader'
         ],
       },
     ],
