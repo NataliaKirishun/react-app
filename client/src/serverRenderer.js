@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import Root from './Root';
@@ -31,7 +32,26 @@ function renderHTML(html, preloadedState) {
 
 export default function serverRenderer() {
   return (req, res) => {
-    const {store} = configureStore();
+    const params = qs.parse(req.query);
+    let store;
+    if (Object.keys(params).length) {
+      const preloadedState = {
+        search:
+          {
+            currentPage: 1,
+            moviesPerPage: params.limit,
+            searchBy: params.searchBy,
+            sortBy: params.sortBy,
+            sortOrder: params.sortOrder,
+            offset: +params.offset,
+            term: params.search
+          }
+      };
+      store = configureStore(preloadedState).store;
+    } else {
+      store = configureStore().store;
+    }
+
     const context = {};
 
     const renderRoot = () => (
@@ -54,8 +74,8 @@ export default function serverRenderer() {
     };
 
     const htmlString = renderToString(renderRoot());
-    const preloadedState = store.getState();
+    const finishedState = store.getState();
 
-    res.send(renderHTML(htmlString, preloadedState));
+    res.send(renderHTML(htmlString, finishedState));
   };
 }
