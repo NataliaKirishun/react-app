@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -7,13 +8,18 @@ import Theme from '../../common/Theme/Theme';
 import Logo from '../../common/Components/Logo/Logo';
 import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
 import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
-import { fetchMovie } from '../../actions';
+import { fetchMovie } from '../../store';
 
 class Detail extends Component {
+
   componentDidMount() {
     const { match, fetchMovie } = this.props;
-    const { id } = match.params;
-    fetchMovie(id);
+    if (match) {
+      const { id } = match.params;
+      console.log(fetchMovie);
+      fetchMovie(id);
+      console.log('fetch1');
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -21,6 +27,7 @@ class Detail extends Component {
     if (match.params.id !== prevProps.match.params.id) {
       const { id } = match.params;
       fetchMovie(id);
+      console.log('fetch2');
     }
   }
 
@@ -63,11 +70,11 @@ class Detail extends Component {
   }
 }
 
-export default connect(({ movie }) => ({
+export default withRouter(connect(({ movie }) => ({
   targetFilm: movie.activeFilm,
 }), {
   fetchMovie,
-})(Detail);
+})(Detail));
 
 Detail.propTypes = {
   targetFilm: PropTypes.shape({}),

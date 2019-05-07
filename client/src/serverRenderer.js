@@ -39,7 +39,7 @@ export default function serverRenderer() {
         search:
           {
             currentPage: 1,
-            moviesPerPage: params.limit,
+            moviesPerPage: +params.limit,
             searchBy: params.searchBy,
             sortBy: params.sortBy,
             sortOrder: params.sortOrder,

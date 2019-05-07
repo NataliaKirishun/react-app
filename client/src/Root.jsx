@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 
-import App from './container/App/App';
+import App from './App';
 
 const Root = ({ Router, location, context, store }) => (
   <Provider store={store}>

@@ -4,13 +4,10 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Cockpit from '../../components/Cockpit/Cockpit';
-import GenreInfo from '../../components/GenreInfo/GenreInfo';
-import Detail from '../../components/Detail/Detail';
 import Search from '../../components/Search/Search';
-import ErrorHeader from '../../common/Components/ErrorHeader/ErrorHeader';
 import {
   toggleSearchBy, searchButtonHandler, toggleSortBy, fetchMovies, saveTerm, toggleSortOrder,
-} from '../../actions';
+} from '../../store';
 
 class Header extends Component {
   state={
@@ -41,7 +38,7 @@ class Header extends Component {
       saveTerm, fetchMovies, searchBy, sortBy, sortOrder, offset, moviesPerPage, history,
     } = this.props;
     saveTerm(term);
-    history.push(`/movies?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`);
+    history.push(`/search?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`);
     fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
   }
 
@@ -51,13 +48,14 @@ class Header extends Component {
     } = this.props;
     toggleSortBy(sortBy);
     if (term) {
+      console.log(fetchMovies);
       fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     }
   }
 
   render() {
     const {
-      activeFilm,
+      // activeFilm,
       total,
       searchBy,
       sortBy,
@@ -67,26 +65,8 @@ class Header extends Component {
     return (
       <Fragment>
         <HeaderWrapper>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <Search searchBy={searchBy} inputChangeHandler={this.inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={this.formSubmitHandler} />
-              } />
-            <Route
-              path="/movies"
-              render={() => <Search searchBy={searchBy} inputChangeHandler={this.inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={this.formSubmitHandler} />
-              } />
-            <Route path="/film/:id" component={Detail} />
-            <Route render={() => <ErrorHeader />} />
-          </Switch>
-          <Switch>
-            <Route
-              path="/movies"
-              render={() => <Cockpit sortBy={sortBy} sortOrder={sortOrder} toggleSortBy={this.toggleSortByHandler} toggleSortDirection={this.toggleSortDirectionHandler} filmsCount={total} />
-              } />
-            <Route path="/film" render={() => <GenreInfo activeFilm={activeFilm} />} />
-          </Switch>
+          <Search searchBy={searchBy} inputChangeHandler={this.inputChangeHandler} toggleSearchBy={toggleSearchBy} formSubmitHandler={this.formSubmitHandler} />
+          <Cockpit sortBy={sortBy} sortOrder={sortOrder} toggleSortBy={this.toggleSortByHandler} toggleSortDirection={this.toggleSortDirectionHandler} filmsCount={total} />
         </HeaderWrapper>
       </Fragment>
     );
@@ -120,7 +100,7 @@ Header.propTypes = {
   activeFilm: PropTypes.shape(),
   term: PropTypes.string,
   offset: PropTypes.number,
-  moviesPerPage: PropTypes.string,
+  moviesPerPage: PropTypes.number,
   history: PropTypes.shape(),
 };
 
