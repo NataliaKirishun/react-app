@@ -8,7 +8,7 @@ import {
     CHANGE_PAGE,
     CHANGE_ITEMS_PER_PAGE,
     CHANGE_OFFSET,
-} from '../constants';
+} from '../../constants/index';
 
 const initialState = {
     currentPage: 1,

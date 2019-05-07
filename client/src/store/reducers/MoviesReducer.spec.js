@@ -3,7 +3,7 @@ import movies from './movies';
 import {
     FETCH_MOVIES_SUCCESS,
     FETCH_MOVIES_ERROR,
-} from '../constants';
+} from '../../constants/index';
 
 const initialState = {
     movies: [],

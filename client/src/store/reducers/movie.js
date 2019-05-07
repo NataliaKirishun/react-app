@@ -2,7 +2,7 @@ import {
   FETCH_MOVIE_SUCCESS,
   FETCH_SAME_GENRE_MOVIES_SUCCESS,
   SEARCH_BUTTON_CLICK,
-} from '../constants';
+} from '../../constants/index';
 
 const initialState = {
   activeFilm: null,

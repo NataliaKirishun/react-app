@@ -1,7 +1,7 @@
 import {
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_ERROR,
-} from '../constants';
+} from '../../constants/index';
 
 export const initialState = {
   movies: [],
