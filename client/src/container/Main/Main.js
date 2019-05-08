@@ -11,10 +11,11 @@ import {
 } from '../../store';
 import {getUrl} from '../../constants';
 
+
 class Main extends Component {
 
   componentWillMount() {
-      console.log('cwm')
+    const { match } = this.props;
     const { location } = this.props;
     if (location.search) {
       this.urlParse();
@@ -29,15 +30,8 @@ class Main extends Component {
   }
 
   urlParse = () => {
-    const { fetchMovies, location } = this.props;
-    const urlParams = new URLSearchParams(location.search);
-    const searchBy = urlParams.get('searchBy');
-    const sortBy = urlParams.get('sortBy');
-    const sortOrder = urlParams.get('sortOrder');
-    const search = urlParams.get('search');
-    const offset = urlParams.get('offset');
-    const limit = urlParams.get('limit');
-    const url =  getUrl(searchBy, sortBy, sortOrder, search, offset, limit);
+    const {fetchMovies, searchBy, sortBy, sortOrder, moviesPerPage, offset, term} = this.props;
+    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     fetchMovies(url);
   }
 
@@ -119,6 +113,7 @@ export default withRouter(connect(({ search, movies, movie }) => ({
   sortBy: search.sortBy,
   sortOrder: search.sortOrder,
   term: search.term,
+  offset: search.offset,
   movies: movies.movies,
   total: movies.total,
   loading: movies.loading,

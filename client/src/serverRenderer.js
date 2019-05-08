@@ -3,9 +3,11 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import Root from './Root';
 import configureStore from './store/configureStore';
+import qs from 'qs';
+import { ServerStyleSheet } from 'styled-components';
 
 
-function renderHTML(html, preloadedState) {
+function renderHTML(html, preloadedState, styles) {
   return `
       <!doctype html>
       <html>
@@ -16,7 +18,8 @@ function renderHTML(html, preloadedState) {
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
           <title>Netfix</title>
-           ${process.env.NODE_ENV === 'development' ? '' : '<link href="/css/main.css" rel="stylesheet" type="text/css">'}
+          ${styles}
+          ${process.env.NODE_ENV === 'development' ? '' : '<link href="/css/main.css" rel="stylesheet" type="text/css">'}
         </head>
         <body>
           <div id="root">${html}</div>
@@ -31,8 +34,26 @@ function renderHTML(html, preloadedState) {
 
 export default function serverRenderer() {
   return (req, res) => {
-    const store = configureStore();
-    console.log(store);
+    const sheet = new ServerStyleSheet();
+    const params = qs.parse(req.query);
+    let store;
+    if (Object.keys(params).length) {
+      const preloadedState = {
+        search:
+          {
+            currentPage: 1,
+            moviesPerPage: +params.limit,
+            searchBy: params.searchBy,
+            sortBy: params.sortBy,
+            sortOrder: params.sortOrder,
+            offset: +params.offset,
+            term: params.search
+          }
+      };
+      store = configureStore(preloadedState);
+    } else {
+      store = configureStore();
+    }
     // This context object contains the results of the render
     const context = {};
 
@@ -44,9 +65,9 @@ export default function serverRenderer() {
         store={store}
       />
     );
-    console.log(store.runSaga());
     store.runSaga().done.then(() => {
-      const htmlString = renderToString(renderRoot());
+      const htmlString = renderToString(sheet.collectStyles(renderRoot()));
+      const styles = sheet.getStyleTags();
 
       // context.url will contain the URL to redirect to if a <Redirect> was used
       if (context.url) {
@@ -55,11 +76,9 @@ export default function serverRenderer() {
         });
         res.end();
         return;
-      }
-
-      const preloadedState = store.getState();
-
-      res.send(renderHTML(htmlString, preloadedState));
+      };
+      const finishedState = store.getState();
+      res.send(renderHTML(htmlString, finishedState, styles));
     });
 
     // Do first render, starts initial actions.
