@@ -7,11 +7,14 @@ import Theme from '../../common/Theme/Theme';
 import Film from '../../components/Film/Film';
 import Pagination from '../../common/Components/Pagination/Pagination';
 import {
-  fetchMovies, changePage, changeOffset, fetchSameGenreMovies, changeMoviesPerPage,
+  fetchMovies, changePage, changeOffset, changeMoviesPerPage,
 } from '../../store';
+import {getUrl} from '../../constants';
 
 class Main extends Component {
-  componentDidMount() {
+
+  componentWillMount() {
+      console.log('cwm')
     const { location } = this.props;
     if (location.search) {
       this.urlParse();
@@ -34,69 +37,74 @@ class Main extends Component {
     const search = urlParams.get('search');
     const offset = urlParams.get('offset');
     const limit = urlParams.get('limit');
-    fetchMovies(searchBy, sortBy, sortOrder, search, offset, limit);
+    const url =  getUrl(searchBy, sortBy, sortOrder, search, offset, limit);
+    fetchMovies(url);
   }
 
   changePageHandler = (id, currentPage) => {
     const {
-      changePage, changeOffset, fetchMovies, activeFilm, fetchSameGenreMovies, searchBy, sortBy, sortOrder, term, moviesPerPage, match,
+      changePage, changeOffset, fetchMovies, searchBy, sortBy, sortOrder, term, moviesPerPage,
     } = this.props;
     changePage(+currentPage);
     changeOffset();
     const offset = (currentPage - 1) * moviesPerPage;
-    if (match.params.id) {
-      fetchSameGenreMovies(activeFilm.genres[0]);
-    } else {
-      fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
-    }
+    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    fetchMovies(url);
   }
 
   changeMoviesPerPageHandler = (id, moviesPerPage) => {
     const {
-      changeMoviesPerPage, changeOffset, fetchMovies, activeFilm, fetchSameGenreMovies, searchBy, sortBy, sortOrder, term, offset, match,
+      changeMoviesPerPage, changeOffset, fetchMovies, searchBy, sortBy, sortOrder, term, offset,
     } = this.props;
     changeMoviesPerPage(+moviesPerPage);
     changeOffset();
-    if (match.params.id) {
-      fetchSameGenreMovies(activeFilm.genres[0]);
-    } else {
-      fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
-    }
+    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    fetchMovies(url);
   }
 
   render() {
     const {
-      currentPage, moviesPerPage, movies, total, sameGenresFilms, match,
+      currentPage, moviesPerPage, movies, total, loading, mode,
     } = this.props;
     const arrayOfPages = Array(Math.ceil(total / moviesPerPage)).fill(1).map((v, i) => i + 1);
     const arrayOfPerPages = [12, 24, 48, 96];
-    const films = match && match.params.id ? sameGenresFilms : movies;
-    if (!films || !films.length) {
+    if (loading) {
       return (
-        <EmptyWrapper>There are no such films...</EmptyWrapper>
+        <EmptyWrapper>Loading...</EmptyWrapper>
+      );
+    }
+    if (!loading && !movies.length) {
+      return (
+        <EmptyWrapper>There are no such films ...</EmptyWrapper>
       );
     }
     return (
       <FilmsBackground>
-        <Pagination
-          arrayOfPages={arrayOfPages}
-          arrayOfPerPages={arrayOfPerPages}
-          currentPage={currentPage}
-          moviesPerPage={moviesPerPage}
-          changePageHandler={this.changePageHandler}
-          changePerPageHandler={this.changeMoviesPerPageHandler}
-        />
+        {mode === 'movies' ?
+          (<Pagination
+            arrayOfPages={arrayOfPages}
+            arrayOfPerPages={arrayOfPerPages}
+            currentPage={currentPage}
+            moviesPerPage={moviesPerPage}
+            changePageHandler={this.changePageHandler}
+            changePerPageHandler={this.changeMoviesPerPageHandler}
+          />)
+          : null
+        }
         <FilmsWrapper>
-          {films.map((film) => <Film info={film} key={film.id} />)}
+          {movies.map((film) => <Film info={film} key={film.id} />)}
         </FilmsWrapper>
-        <Pagination
-          arrayOfPages={arrayOfPages}
-          arrayOfPerPages={arrayOfPerPages}
-          currentPage={currentPage}
-          moviesPerPage={moviesPerPage}
-          changePageHandler={this.changePageHandler}
-          changePerPageHandler={this.changeMoviesPerPageHandler}
-        />
+        {mode === 'movies' ?
+          (<Pagination
+            arrayOfPages={arrayOfPages}
+            arrayOfPerPages={arrayOfPerPages}
+            currentPage={currentPage}
+            moviesPerPage={moviesPerPage}
+            changePageHandler={this.changePageHandler}
+            changePerPageHandler={this.changeMoviesPerPageHandler}
+          />)
+          : null
+        }
       </FilmsBackground>
     );
   }
@@ -113,8 +121,10 @@ export default withRouter(connect(({ search, movies, movie }) => ({
   term: search.term,
   movies: movies.movies,
   total: movies.total,
+  loading: movies.loading,
+  mode: movies.mode,
 }), {
-  fetchMovies, changePage, fetchSameGenreMovies, changeOffset, changeMoviesPerPage,
+  fetchMovies, changePage, changeOffset, changeMoviesPerPage,
 })(Main));
 
 Main.propTypes = {

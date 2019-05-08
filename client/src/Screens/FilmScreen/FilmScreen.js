@@ -7,7 +7,7 @@ const FilmScreen = () => (
   <Fragment>
     <Detail />
     <GenreInfo />
-    <Main />
+    <Main/>
   </Fragment>
 );
 

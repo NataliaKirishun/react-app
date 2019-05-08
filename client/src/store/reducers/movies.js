@@ -1,27 +1,45 @@
 import {
-  FETCH_MOVIES_SUCCESS,
-  FETCH_MOVIES_ERROR,
+  FETCH_MOVIES,
+  UPDATE_MOVIES,
+  UPDATE_SAME_GENRE_MOVIES,
+  CLEAR_STATE,
 } from '../../constants/index';
 
 export const initialState = {
+  url: null,
   movies: [],
-  isFetched: false,
+  mode: null,
+  loading: false,
   total: 0,
 };
 
-const movies = (state = initialState, { type, movies, total }) => {
+const movies = (state = initialState, { type, url, movies, total }) => {
   switch (type) {
-    case FETCH_MOVIES_SUCCESS:
+    case FETCH_MOVIES:
+      return {
+        ...state,
+        loading: true,
+        url,
+      };
+    case UPDATE_MOVIES:
+      return {
+        ...state,
+        loading: false,
+        mode:'movies',
+        movies,
+        total,
+      };
+    case UPDATE_SAME_GENRE_MOVIES:
       return {
         ...state,
         movies,
-        total,
-        isFetched: true,
+        mode:'sameGenre',
       };
-    case FETCH_MOVIES_ERROR:
+    case CLEAR_STATE:
       return {
         ...state,
-        isFetched: true,
+        movies: [],
+        total: 0,
       };
     default:
       return state;

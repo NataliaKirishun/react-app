@@ -6,7 +6,7 @@ import './style.css';
 import Root from './Root';
 import configureStore from './store/configureStore';
 
-const {store, persistor} = configureStore(window.PRELOADED_STATE);
+const store = configureStore(window.PRELOADED_STATE);
 
 const root = (
   <Root

@@ -1,33 +1,35 @@
 import {
-  FETCH_MOVIE_SUCCESS,
-  FETCH_SAME_GENRE_MOVIES_SUCCESS,
+  FETCH_MOVIE,
+  UPDATE_MOVIE,
   SEARCH_BUTTON_CLICK,
 } from '../../constants/index';
 
 const initialState = {
   activeFilm: null,
-  sameGenresFilms: null,
+  id: null,
+  loading: false,
 };
 
 const movie = (state = initialState, {
-  type, activeFilm, sameGenresFilms,
+  type, activeFilm, id,
 }) => {
   switch (type) {
-    case FETCH_MOVIE_SUCCESS:
+    case FETCH_MOVIE:
+      return {
+        ...state,
+        id,
+        loading: true,
+      };
+    case UPDATE_MOVIE:
       return {
         ...state,
         activeFilm,
-      };
-    case FETCH_SAME_GENRE_MOVIES_SUCCESS:
-      return {
-        ...state,
-        sameGenresFilms,
+        loading: false,
       };
     case SEARCH_BUTTON_CLICK:
       return {
         ...state,
         activeFilm: null,
-        sameGenresFilms: null,
       };
     default:
       return state;

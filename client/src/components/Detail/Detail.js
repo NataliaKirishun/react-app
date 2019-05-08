@@ -8,18 +8,14 @@ import Theme from '../../common/Theme/Theme';
 import Logo from '../../common/Components/Logo/Logo';
 import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
 import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
-import { fetchMovie } from '../../store';
+import { fetchMovie, clearState } from '../../store';
 
 class Detail extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     const { match, fetchMovie } = this.props;
-    if (match) {
-      const { id } = match.params;
-      console.log(fetchMovie);
-      fetchMovie(id);
-      console.log('fetch1');
-    }
+    const { id } = match.params;
+    fetchMovie(id);
   }
 
   componentDidUpdate(prevProps) {
@@ -27,19 +23,22 @@ class Detail extends Component {
     if (match.params.id !== prevProps.match.params.id) {
       const { id } = match.params;
       fetchMovie(id);
-      console.log('fetch2');
     }
   }
 
   render() {
-    const { targetFilm } = this.props;
-    if (!targetFilm) { return (<div>Loading</div>); }
+    const { targetFilm, clearState } = this.props;
+    if (!targetFilm) {
+      return (
+        <EmptyWrapper>Loading...</EmptyWrapper>
+      );
+    }
     return (
       <HeaderBackground>
         <HeaderWrapper>
           <Container>
             <Logo />
-            <ButtonLink to="/" id="backToSearch">Search</ButtonLink>
+            <ButtonLink  to="/" onClick={clearState} id="backToSearch">Search</ButtonLink>
           </Container>
           <Container>
             <PosterWrapper>
@@ -73,7 +72,7 @@ class Detail extends Component {
 export default withRouter(connect(({ movie }) => ({
   targetFilm: movie.activeFilm,
 }), {
-  fetchMovie,
+  fetchMovie, clearState,
 })(Detail));
 
 Detail.propTypes = {
@@ -137,4 +136,12 @@ const ButtonLink = styled(Link)`
     text-decoration: none;
     padding: 6px;
     border-radius: 6px;
+`;
+
+const EmptyWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    color: ${Theme.colors.red};
+    font-size: 24px;
+    flex: auto;
 `;

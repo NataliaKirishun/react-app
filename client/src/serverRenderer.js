@@ -1,5 +1,4 @@
 import React from 'react';
-import qs from 'qs';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import Root from './Root';
@@ -32,26 +31,9 @@ function renderHTML(html, preloadedState) {
 
 export default function serverRenderer() {
   return (req, res) => {
-    const params = qs.parse(req.query);
-    let store;
-    if (Object.keys(params).length) {
-      const preloadedState = {
-        search:
-          {
-            currentPage: 1,
-            moviesPerPage: +params.limit,
-            searchBy: params.searchBy,
-            sortBy: params.sortBy,
-            sortOrder: params.sortOrder,
-            offset: +params.offset,
-            term: params.search
-          }
-      };
-      store = configureStore(preloadedState).store;
-    } else {
-      store = configureStore().store;
-    }
-
+    const store = configureStore();
+    console.log(store);
+    // This context object contains the results of the render
     const context = {};
 
     const renderRoot = () => (
@@ -62,20 +44,27 @@ export default function serverRenderer() {
         store={store}
       />
     );
+    console.log(store.runSaga());
+    store.runSaga().done.then(() => {
+      const htmlString = renderToString(renderRoot());
 
+      // context.url will contain the URL to redirect to if a <Redirect> was used
+      if (context.url) {
+        res.writeHead(302, {
+          Location: context.url,
+        });
+        res.end();
+        return;
+      }
+
+      const preloadedState = store.getState();
+
+      res.send(renderHTML(htmlString, preloadedState));
+    });
+
+    // Do first render, starts initial actions.
     renderToString(renderRoot());
-
-    if (context.url) {
-      res.writeHead(302, {
-        Location: context.url,
-      });
-      res.end();
-      return;
-    };
-
-    const htmlString = renderToString(renderRoot());
-    const finishedState = store.getState();
-
-    res.send(renderHTML(htmlString, finishedState));
+    // When the first render is finished, send the END action to redux-saga.
+    store.close();
   };
 }

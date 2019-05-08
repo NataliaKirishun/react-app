@@ -19,7 +19,7 @@ import {
     CHANGE_OFFSET,
     SEARCH_BUTTON_CLICK,
 
-} from '../constants';
+} from '../../constants/index';
 
 import {
     fetchMoviesSuccess,

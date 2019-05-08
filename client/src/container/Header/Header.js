@@ -8,6 +8,7 @@ import Search from '../../components/Search/Search';
 import {
   toggleSearchBy, searchButtonHandler, toggleSortBy, fetchMovies, saveTerm, toggleSortOrder,
 } from '../../store';
+import {getUrl} from '../../constants';
 
 class Header extends Component {
   state={
@@ -26,9 +27,17 @@ class Header extends Component {
     } = this.props;
     const sorted = sortOrder === 'asc' ? 'desc' : 'asc';
     toggleSortOrder(sorted);
-    if (term) {
-      fetchMovies(searchBy, sortBy, sorted, term, offset, moviesPerPage);
-    }
+    const url =  getUrl(searchBy, sortBy, sorted, term, offset, moviesPerPage);
+    fetchMovies(url);
+  }
+
+  toggleSortByHandler = (sortBy) => {
+    const {
+      toggleSortBy, fetchMovies, searchBy, sortOrder, term, offset, moviesPerPage,
+    } = this.props;
+    toggleSortBy(sortBy);
+    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    fetchMovies(url);
   }
 
   formSubmitHandler = (e) => {
@@ -39,23 +48,12 @@ class Header extends Component {
     } = this.props;
     saveTerm(term);
     history.push(`/search?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`);
-    fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
-  }
-
-  toggleSortByHandler = (sortBy) => {
-    const {
-      toggleSortBy, fetchMovies, searchBy, sortOrder, term, offset, moviesPerPage,
-    } = this.props;
-    toggleSortBy(sortBy);
-    if (term) {
-      console.log(fetchMovies);
-      fetchMovies(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
-    }
+    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    fetchMovies(url);
   }
 
   render() {
     const {
-      // activeFilm,
       total,
       searchBy,
       sortBy,
