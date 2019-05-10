@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Footer from '../../components/Footer/Footer';
 import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
+
 class App extends Component {
   render() {
     return (

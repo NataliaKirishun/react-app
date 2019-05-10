@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Film = ({ info, albumClickHandler }) => (
-  <FilmLink onClick={() => albumClickHandler(info.id)}>
+const Film = ({ info }) => (
+  <FilmLink to={`/film/${info.id}`} key={info.id}>
     <Img src={info.poster_path} />
     <InfoWrapper>
       <Title>{info.title}</Title>
@@ -33,10 +34,9 @@ Film.propTypes = {
     genres: PropTypes.array,
     runtime: PropTypes.number,
   }),
-  albumClickHandler: PropTypes.func.isRequired,
 };
 
-const FilmLink = styled.a.attrs({
+const FilmLink = styled(Link).attrs({
   className: 'film-link',
 })`
     position: relative;

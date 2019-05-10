@@ -1,20 +1,38 @@
-import React, { Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 import Logo from '../../common/Components/Logo/Logo';
-import Button from '../../common/Components/Button/Button';
 import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
 import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
+import { fetchMovie } from '../../actions';
 
-const Detail = ({ targetFilm, searchButtonHandler }) => {
-  return (
-    <Fragment>
+class Detail extends Component {
+  componentDidMount() {
+    const { match, fetchMovie } = this.props;
+    const { id } = match.params;
+    fetchMovie(id);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { fetchMovie, match } = this.props;
+    if (match.params.id !== prevProps.match.params.id) {
+      const { id } = match.params;
+      fetchMovie(id);
+    }
+  }
+
+  render() {
+    const { targetFilm } = this.props;
+    if (!targetFilm) { return (<div>Loading</div>); }
+    return (
       <HeaderBackground>
         <HeaderWrapper>
           <Container>
             <Logo />
-            <Button id="backToSearch" onClick={() => searchButtonHandler()} white>Search</Button>
+            <ButtonLink to="/" id="backToSearch">Search</ButtonLink>
           </Container>
           <Container>
             <PosterWrapper>
@@ -41,20 +59,20 @@ const Detail = ({ targetFilm, searchButtonHandler }) => {
           </Container>
         </HeaderWrapper>
       </HeaderBackground>
-      <GenreInfo>
-        <GenreInfoWrapper>
-          {`Films by  ${targetFilm.genres[0]}  genre`}
-        </GenreInfoWrapper>
-      </GenreInfo>
-    </Fragment>
-  );
-};
+    );
+  }
+}
 
-export default Detail;
+export default connect(({ movie }) => ({
+  targetFilm: movie.activeFilm,
+}), {
+  fetchMovie,
+})(Detail);
 
 Detail.propTypes = {
-  targetFilm: PropTypes.shape({}).isRequired,
-  searchButtonHandler: PropTypes.func.isRequired,
+  targetFilm: PropTypes.shape({}),
+  fetchMovie: PropTypes.func,
+  match: PropTypes.shape({}),
 };
 
 const Container = styled.div`
@@ -106,13 +124,10 @@ const Info = styled.span`
     `}
 `;
 
-const GenreInfo = styled.div`
-    width: 100%;
-    background-color: ${Theme.colors.grey};
-    padding: 10px 0;
-`;
-
-const GenreInfoWrapper = styled.div`
-    width: 80%;
-    margin: 0 auto;
+const ButtonLink = styled(Link)`
+    background-color: ${Theme.colors.white};
+    color: ${Theme.colors.red};
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 6px;
 `;
