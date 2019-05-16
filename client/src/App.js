@@ -3,40 +3,10 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Footer from './components/Footer/Footer';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
-import Loading from './common/Components/Loading/Loading';
-import DynamicImport from "./code_splitting/DynamicImport/DynamicImport";
-
-const MainScreen = (props) => (
-  <DynamicImport load={() => import('./Screens/MainScreen/MainScreen')}>
-    {(Component) => Component === null
-      ? <Loading />
-      : <Component {...props} />}
-  </DynamicImport>
-);
-
-const ResultsScreen = (props) => (
-  <DynamicImport load={() => import('./Screens/ResultsScreen/ResultsScreen')}>
-    {(Component) => Component === null
-      ? <Loading />
-      : <Component {...props} />}
-  </DynamicImport>
-);
-
-const FilmScreen = (props) => (
-  <DynamicImport load={() => import('./Screens/FilmScreen/FilmScreen')}>
-    {(Component) => Component === null
-      ? <Loading />
-      : <Component {...props} />}
-  </DynamicImport>
-);
-
-const NotFoundScreen = (props) => (
-  <DynamicImport load={() => import('./Screens/NotFoundScreen/NotFoundScreen')}>
-    {(Component) => Component === null
-      ? <Loading />
-      : <Component {...props} />}
-  </DynamicImport>
-);
+import MainScreen from './Screens/MainScreen/MainScreen';
+import ResultsScreen from "./Screens/ResultsScreen/ResultsScreen";
+import FilmScreen from "./Screens/FilmScreen/FilmScreen";
+import NotFoundScreen from "./Screens/NotFoundScreen/NotFoundScreen";
 
 class App extends Component {
   render() {
