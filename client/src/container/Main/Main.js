@@ -9,13 +9,11 @@ import Pagination from '../../common/Components/Pagination/Pagination';
 import {
   fetchMovies, changePage, changeOffset, changeMoviesPerPage,
 } from '../../store';
-import {getUrl} from '../../constants';
+import { getUrl } from '../../constants';
 
 
 class Main extends Component {
-
   componentWillMount() {
-    const { match } = this.props;
     const { location } = this.props;
     if (location.search) {
       this.urlParse();
@@ -24,14 +22,16 @@ class Main extends Component {
 
   componentDidUpdate(prevProps) {
     const { location } = this.props;
-    if ( location.search !== prevProps.location.search) {
+    if (location.search !== prevProps.location.search) {
       this.urlParse();
     }
   }
 
   urlParse = () => {
-    const {fetchMovies, searchBy, sortBy, sortOrder, moviesPerPage, offset, term} = this.props;
-    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    const {
+      fetchMovies, searchBy, sortBy, sortOrder, moviesPerPage, offset, term,
+    } = this.props;
+    const url = getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     fetchMovies(url);
   }
 
@@ -42,9 +42,9 @@ class Main extends Component {
     changePage(+currentPage);
     changeOffset();
     const offset = (currentPage - 1) * moviesPerPage;
-    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    const url = getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     fetchMovies(url);
-  }
+  };
 
   changeMoviesPerPageHandler = (id, moviesPerPage) => {
     const {
@@ -52,9 +52,9 @@ class Main extends Component {
     } = this.props;
     changeMoviesPerPage(+moviesPerPage);
     changeOffset();
-    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    const url = getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     fetchMovies(url);
-  }
+  };
 
   render() {
     const {
@@ -74,29 +74,33 @@ class Main extends Component {
     }
     return (
       <FilmsBackground>
-        {mode === 'movies' ?
-          (<Pagination
-            arrayOfPages={arrayOfPages}
-            arrayOfPerPages={arrayOfPerPages}
-            currentPage={currentPage}
-            moviesPerPage={moviesPerPage}
-            changePageHandler={this.changePageHandler}
-            changePerPageHandler={this.changeMoviesPerPageHandler}
-          />)
+        {mode === 'movies'
+          ? (
+            <Pagination
+              arrayOfPages={arrayOfPages}
+              arrayOfPerPages={arrayOfPerPages}
+              currentPage={currentPage}
+              moviesPerPage={moviesPerPage}
+              changePageHandler={this.changePageHandler}
+              changePerPageHandler={this.changeMoviesPerPageHandler}
+          />
+          )
           : null
         }
         <FilmsWrapper>
           {movies.map((film) => <Film info={film} key={film.id} />)}
         </FilmsWrapper>
-        {mode === 'movies' ?
-          (<Pagination
-            arrayOfPages={arrayOfPages}
-            arrayOfPerPages={arrayOfPerPages}
-            currentPage={currentPage}
-            moviesPerPage={moviesPerPage}
-            changePageHandler={this.changePageHandler}
-            changePerPageHandler={this.changeMoviesPerPageHandler}
-          />)
+        {mode === 'movies'
+          ? (
+            <Pagination
+              arrayOfPages={arrayOfPages}
+              arrayOfPerPages={arrayOfPerPages}
+              currentPage={currentPage}
+              moviesPerPage={moviesPerPage}
+              changePageHandler={this.changePageHandler}
+              changePerPageHandler={this.changeMoviesPerPageHandler}
+          />
+          )
           : null
         }
       </FilmsBackground>
@@ -134,13 +138,14 @@ Main.propTypes = {
   sortOrder: PropTypes.string,
   searchBy: PropTypes.string,
   sortBy: PropTypes.string,
-  fetchSameGenreMovies: PropTypes.func,
   changeOffset: PropTypes.func,
   changePage: PropTypes.func,
   fetchMovies: PropTypes.func,
   activeFilm: PropTypes.shape({}),
   match: PropTypes.shape({}),
-  location: PropTypes.shape({}),
+  location: { search: PropTypes.object },
+  loading: PropTypes.bool,
+  mode: PropTypes.string,
 };
 
 const FilmsBackground = styled.div`

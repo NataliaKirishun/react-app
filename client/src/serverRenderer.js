@@ -1,10 +1,10 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import Root from './Root';
-import configureStore from './store/configureStore';
 import qs from 'qs';
 import { ServerStyleSheet } from 'styled-components';
+import Root from './Root';
+import configureStore from './store/configureStore';
 
 
 function renderHTML(html, preloadedState, styles) {
@@ -47,8 +47,8 @@ export default function serverRenderer() {
             sortBy: params.sortBy,
             sortOrder: params.sortOrder,
             offset: +params.offset,
-            term: params.search
-          }
+            term: params.search,
+          },
       };
       store = configureStore(preloadedState);
     } else {
@@ -76,7 +76,7 @@ export default function serverRenderer() {
         });
         res.end();
         return;
-      };
+      }
       const finishedState = store.getState();
       res.send(renderHTML(htmlString, finishedState, styles));
     });

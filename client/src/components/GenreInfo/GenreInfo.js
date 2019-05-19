@@ -1,30 +1,25 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 
-class GenreInfo extends Component {
-  render(){
-    const {activeFilm} = this.props;
-    return (
-    <GenreInfoComponent>
-      <GenreInfoWrapper>
+const GenreInfo = ({ activeFilm }) => (
+  <GenreInfoComponent>
+    <GenreInfoWrapper>
         Films by
-        {activeFilm ? `   ${activeFilm.genres[0]}    ` : '...'}
-         genre
-      </GenreInfoWrapper>
-    </GenreInfoComponent>
-    )
-  }
-};
+      {activeFilm ? `   ${activeFilm.genres[0]}    ` : '...'}
+        genre
+    </GenreInfoWrapper>
+  </GenreInfoComponent>
+);
 
 export default connect(({ movie }) => ({
   activeFilm: movie.activeFilm,
 }), null)(GenreInfo);
 
 GenreInfo.propTypes = {
-  activeFilm: PropTypes.object,
+  activeFilm: PropTypes.shape(),
 };
 
 const GenreInfoComponent = styled.div`

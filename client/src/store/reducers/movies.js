@@ -13,7 +13,9 @@ export const initialState = {
   total: 0,
 };
 
-const movies = (state = initialState, { type, url, movies, total }) => {
+const movies = (state = initialState, {
+  type, url, movies, total,
+}) => {
   switch (type) {
     case FETCH_MOVIES:
       return {
@@ -25,7 +27,7 @@ const movies = (state = initialState, { type, url, movies, total }) => {
       return {
         ...state,
         loading: false,
-        mode:'movies',
+        mode: 'movies',
         movies,
         total,
       };
@@ -33,7 +35,7 @@ const movies = (state = initialState, { type, url, movies, total }) => {
       return {
         ...state,
         movies,
-        mode:'sameGenre',
+        mode: 'sameGenre',
       };
     case CLEAR_STATE:
       return {

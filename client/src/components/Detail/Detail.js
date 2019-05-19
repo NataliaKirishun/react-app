@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import styled, { css } from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 import Logo from '../../common/Components/Logo/Logo';
@@ -11,7 +11,6 @@ import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
 import { fetchMovie, clearState } from '../../store';
 
 class Detail extends Component {
-
   componentWillMount() {
     const { match, fetchMovie } = this.props;
     const { id } = match.params;
@@ -38,7 +37,7 @@ class Detail extends Component {
         <HeaderWrapper>
           <Container>
             <Logo />
-            <ButtonLink  to="/" onClick={clearState} id="backToSearch">Search</ButtonLink>
+            <ButtonLink to="/" onClick={clearState} id="backToSearch">Search</ButtonLink>
           </Container>
           <Container>
             <PosterWrapper>
@@ -78,7 +77,12 @@ export default withRouter(connect(({ movie }) => ({
 Detail.propTypes = {
   targetFilm: PropTypes.shape({}),
   fetchMovie: PropTypes.func,
-  match: PropTypes.shape({}),
+  match: {
+    params: {
+      id: PropTypes.number,
+    },
+  },
+  clearState: PropTypes.func,
 };
 
 const Container = styled.div`

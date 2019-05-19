@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Cockpit from '../../components/Cockpit/Cockpit';
@@ -8,7 +8,7 @@ import Search from '../../components/Search/Search';
 import {
   toggleSearchBy, searchButtonHandler, toggleSortBy, fetchMovies, saveTerm, toggleSortOrder,
 } from '../../store';
-import {getUrl} from '../../constants';
+import { getUrl } from '../../constants';
 
 class Header extends Component {
   state={
@@ -27,7 +27,7 @@ class Header extends Component {
     } = this.props;
     const sorted = sortOrder === 'asc' ? 'desc' : 'asc';
     toggleSortOrder(sorted);
-    const url =  getUrl(searchBy, sortBy, sorted, term, offset, moviesPerPage);
+    const url = getUrl(searchBy, sortBy, sorted, term, offset, moviesPerPage);
     fetchMovies(url);
   }
 
@@ -36,7 +36,7 @@ class Header extends Component {
       toggleSortBy, fetchMovies, searchBy, sortOrder, term, offset, moviesPerPage,
     } = this.props;
     toggleSortBy(sortBy);
-    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    const url = getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     fetchMovies(url);
   }
 
@@ -48,7 +48,7 @@ class Header extends Component {
     } = this.props;
     saveTerm(term);
     history.push(`/search?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`);
-    const url =  getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
+    const url = getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage);
     fetchMovies(url);
   }
 
@@ -95,7 +95,6 @@ Header.propTypes = {
   toggleSortOrder: PropTypes.func,
   fetchMovies: PropTypes.func,
   saveTerm: PropTypes.func,
-  activeFilm: PropTypes.shape(),
   term: PropTypes.string,
   offset: PropTypes.number,
   moviesPerPage: PropTypes.number,
