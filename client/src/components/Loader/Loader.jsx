@@ -1,13 +1,18 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Loader = ({ loading }) => (
-  loading && <span>Loading...</span>
-);
-
-Loader.propTypes = {
-  loading: PropTypes.bool,
+type LoaderProps = {
+  loading: boolean,
 };
+
+const Loader = (props: LoaderProps) => {
+  const { loading } = props;
+  return (
+    loading && <span>Loading...</span>
+  );
+}
+
 Loader.defaultProps = {
   loading: true,
 };
