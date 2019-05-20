@@ -1,26 +1,30 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 
-const GenreInfo = ({ activeFilm }) => (
-  <GenreInfoComponent>
-    <GenreInfoWrapper>
+type GenreInfoProps = {
+  activeFilm: Object,
+};
+
+const GenreInfo = (props: GenreInfoProps) => {
+  const { activeFilm } = props;
+  return (
+    <GenreInfoComponent>
+      <GenreInfoWrapper>
         Films by
-      {activeFilm ? `   ${activeFilm.genres[0]}    ` : '...'}
+        {activeFilm ? `   ${activeFilm.genres[0]}    ` : '...'}
         genre
-    </GenreInfoWrapper>
-  </GenreInfoComponent>
-);
+      </GenreInfoWrapper>
+    </GenreInfoComponent>
+  );
+};
 
 export default connect(({ movie }) => ({
   activeFilm: movie.activeFilm,
 }), null)(GenreInfo);
-
-GenreInfo.propTypes = {
-  activeFilm: PropTypes.shape(),
-};
 
 const GenreInfoComponent = styled.div`
     width: 100%;

@@ -6,7 +6,8 @@ import styled from 'styled-components';
 
 type FilmProps = {
   info: Object,
-}
+};
+
 const Film = (props: FilmProps) => {
   const { info } = props;
   return (

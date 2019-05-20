@@ -15,6 +15,7 @@
 
 [libs]
 flow-typed
+type-def-libs
 
 [lints]
 
