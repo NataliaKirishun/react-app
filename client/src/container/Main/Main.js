@@ -11,7 +11,6 @@ import {
 } from '../../store';
 import { getUrl } from '../../constants';
 
-
 class Main extends Component {
   componentWillMount() {
     const { location } = this.props;
@@ -67,7 +66,7 @@ class Main extends Component {
         <EmptyWrapper>Loading...</EmptyWrapper>
       );
     }
-    if (!loading && !movies.length) {
+    if (!loading && !movies.size) {
       return (
         <EmptyWrapper>There are no such films ...</EmptyWrapper>
       );
@@ -90,19 +89,6 @@ class Main extends Component {
         <FilmsWrapper>
           {movies.map((film) => <Film info={film} key={film.id} />)}
         </FilmsWrapper>
-        {mode === 'movies'
-          ? (
-            <Pagination
-              arrayOfPages={arrayOfPages}
-              arrayOfPerPages={arrayOfPerPages}
-              currentPage={currentPage}
-              moviesPerPage={moviesPerPage}
-              changePageHandler={this.changePageHandler}
-              changePerPageHandler={this.changeMoviesPerPageHandler}
-          />
-          )
-          : null
-        }
       </FilmsBackground>
     );
   }
@@ -130,7 +116,7 @@ Main.propTypes = {
   sameGenresFilms: PropTypes.shape({}),
   total: PropTypes.number,
   offset: PropTypes.number,
-  movies: PropTypes.arrayOf(PropTypes.shape({})),
+  movies: PropTypes.array,
   currentPage: PropTypes.number,
   changeMoviesPerPage: PropTypes.func,
   moviesPerPage: PropTypes.number,

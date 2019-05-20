@@ -12,6 +12,7 @@ const Pagination = ({
       <Arrow left />
       { arrayOfPages.map(item => (
         <RadioButton
+          key={`_${Math.random().toString(36).substr(2, 9)}`}
           inputName="pagination"
           inputValue={item}
           inputId={`item${item}`}
