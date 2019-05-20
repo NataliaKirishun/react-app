@@ -1,40 +1,29 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Film = ({ info }) => (
-  <FilmLink to={`/film/${info.id}`} key={info.id}>
-    <Img src={info.poster_path} />
-    <InfoWrapper>
-      <Title>{info.title}</Title>
-      <span>{info.genres.join(', ')}</span>
-      <FilmYearRelease>
-        {info.release_date.split('-')[0]}
-      </FilmYearRelease>
-    </InfoWrapper>
-  </FilmLink>
-);
+type FilmProps = {
+  info: Object,
+}
+const Film = (props: FilmProps) => {
+  const { info } = props;
+  return (
+    <FilmLink to={`/film/${info.id}`} key={info.id}>
+      <Img src={info.poster_path} />
+      <InfoWrapper>
+        <Title>{info.title}</Title>
+        <span>{info.genres.join(', ')}</span>
+        <FilmYearRelease>
+          {info.release_date.split('-')[0]}
+        </FilmYearRelease>
+      </InfoWrapper>
+    </FilmLink>
+  );
+};
 
 export default Film;
-
-Film.propTypes = {
-  info: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    tagline: PropTypes.string,
-    image: PropTypes.string,
-    vote_average: PropTypes.number,
-    vote_count: PropTypes.number,
-    releasedate: PropTypes.number,
-    poster_path: PropTypes.string,
-    overview: PropTypes.string,
-    budget: PropTypes.number,
-    revenue: PropTypes.number,
-    genres: PropTypes.array,
-    runtime: PropTypes.number,
-  }),
-};
 
 const FilmLink = styled(Link).attrs({
   className: 'film-link',
