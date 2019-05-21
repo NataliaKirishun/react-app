@@ -18,6 +18,7 @@ EmptyResults.propTypes = {
 };
 
 const EmptyBackground = styled.div`
+    flex: auto;
     width: 100%;
     height: auto;
     background-color: ${Theme.colors.white};

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
@@ -7,10 +8,11 @@ import Theme from '../../common/Theme/Theme';
 import Logo from '../../common/Components/Logo/Logo';
 import HeaderBackground from '../../common/Components/HeaderBackground/HeaderBackground';
 import HeaderWrapper from '../../common/Components/HeaderWrapper/HeaderWrapper';
-import { fetchMovie } from '../../actions';
+import { fetchMovie, clearState } from '../../store';
 
 class Detail extends Component {
-  componentDidMount() {
+
+  componentWillMount() {
     const { match, fetchMovie } = this.props;
     const { id } = match.params;
     fetchMovie(id);
@@ -25,14 +27,18 @@ class Detail extends Component {
   }
 
   render() {
-    const { targetFilm } = this.props;
-    if (!targetFilm) { return (<div>Loading</div>); }
+    const { targetFilm, clearState } = this.props;
+    if (!targetFilm) {
+      return (
+        <EmptyWrapper>Loading...</EmptyWrapper>
+      );
+    }
     return (
       <HeaderBackground>
         <HeaderWrapper>
           <Container>
             <Logo />
-            <ButtonLink to="/" id="backToSearch">Search</ButtonLink>
+            <ButtonLink  to="/" onClick={clearState} id="backToSearch">Search</ButtonLink>
           </Container>
           <Container>
             <PosterWrapper>
@@ -63,11 +69,11 @@ class Detail extends Component {
   }
 }
 
-export default connect(({ movie }) => ({
+export default withRouter(connect(({ movie }) => ({
   targetFilm: movie.activeFilm,
 }), {
-  fetchMovie,
-})(Detail);
+  fetchMovie, clearState,
+})(Detail));
 
 Detail.propTypes = {
   targetFilm: PropTypes.shape({}),
@@ -130,4 +136,12 @@ const ButtonLink = styled(Link)`
     text-decoration: none;
     padding: 6px;
     border-radius: 6px;
+`;
+
+const EmptyWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    color: ${Theme.colors.red};
+    font-size: 24px;
+    flex: auto;
 `;

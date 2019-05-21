@@ -718,7 +718,7 @@
     </package>
     <package name="client.src.store" line-rate="1" branch-rate="0.8">
       <classes>
-        <class name="store.js" filename="src\store\store.js" line-rate="1" branch-rate="0.8">
+        <class line-rate="1" branch-rate="0.8">
           <methods>
           </methods>
           <lines>
