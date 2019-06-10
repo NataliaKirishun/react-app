@@ -3,6 +3,6 @@ import movies from './movies';
 import movie from './movie';
 import search from './search';
 
-export const rootReducer = combineReducers({ movies, movie, search });
+const rootReducer = combineReducers({ movies, movie, search });
 
-
+export default rootReducer;

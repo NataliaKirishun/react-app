@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Arrow from '../Arrow/Arrow';
 import RadioButton from '../RadioButton/RadioButton';
@@ -11,6 +12,7 @@ const Pagination = ({
       <Arrow left />
       { arrayOfPages.map(item => (
         <RadioButton
+          key={`_${Math.random().toString(36).substr(2, 9)}`}
           inputName="pagination"
           inputValue={item}
           inputId={`item${item}`}
@@ -18,7 +20,8 @@ const Pagination = ({
           handlerChange={changePageHandler}
           underline>
           {item}
-        </RadioButton>),
+        </RadioButton>
+      ),
       )}
       <Arrow right />
     </form>
@@ -40,6 +43,15 @@ const Pagination = ({
 );
 
 export default Pagination;
+
+Pagination.propTypes = {
+  arrayOfPages: PropTypes.arrayOf(PropTypes.number),
+  arrayOfPerPages: PropTypes.arrayOf(PropTypes.number),
+  currentPage: PropTypes.number,
+  moviesPerPage: PropTypes.number,
+  changePageHandler: PropTypes.func,
+  changePerPageHandler: PropTypes.func,
+};
 
 const PaginationWrapper = styled.div`
     display: flex;

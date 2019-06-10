@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 import {
   FETCH_MOVIES,
   UPDATE_MOVIES,
@@ -5,15 +6,18 @@ import {
   CLEAR_STATE,
 } from '../../constants/index';
 
+
 export const initialState = {
   url: null,
-  movies: [],
+  movies: List([]),
   mode: null,
   loading: false,
   total: 0,
 };
 
-const movies = (state = initialState, { type, url, movies, total }) => {
+const movies = (state = initialState, {
+  type, url, movies, total,
+}) => {
   switch (type) {
     case FETCH_MOVIES:
       return {
@@ -25,20 +29,20 @@ const movies = (state = initialState, { type, url, movies, total }) => {
       return {
         ...state,
         loading: false,
-        mode:'movies',
-        movies,
+        mode: 'movies',
+        movies: List(movies),
         total,
       };
     case UPDATE_SAME_GENRE_MOVIES:
       return {
         ...state,
-        movies,
-        mode:'sameGenre',
+        movies: List(movies),
+        mode: 'sameGenre',
       };
     case CLEAR_STATE:
       return {
         ...state,
-        movies: [],
+        movies: List([]),
         total: 0,
       };
     default:

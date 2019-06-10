@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Theme from '../../Theme/Theme';
 
@@ -28,6 +29,14 @@ const RadioButton = ({
 );
 
 export default RadioButton;
+
+RadioButton.propTypes = {
+  inputName: PropTypes.string,
+  inputValue: PropTypes.string,
+  inputId: PropTypes.string,
+  filtered: PropTypes.string,
+  handlerChange: PropTypes.func,
+};
 
 const RadioInput = styled.input`
     display: none;

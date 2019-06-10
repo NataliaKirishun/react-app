@@ -1,21 +1,24 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Theme from '../../common/Theme/Theme';
 
-const EmptyResults = ({ text }) => (
-  <EmptyBackground>
-    <EmptyContainer>
-      <EmptyText>{text}</EmptyText>
-    </EmptyContainer>
-  </EmptyBackground>
-);
+type EmptyResultsProps = {
+  text: string,
+}
+
+const EmptyResults = (props: EmptyResultsProps) => {
+  const { text } = props;
+  return (
+    <EmptyBackground>
+      <EmptyContainer>
+        <EmptyText className="empty-text">{text}</EmptyText>
+      </EmptyContainer>
+    </EmptyBackground>
+  );
+};
 
 export default EmptyResults;
-
-EmptyResults.propTypes = {
-  text: PropTypes.string.isRequired,
-};
 
 const EmptyBackground = styled.div`
     flex: auto;
@@ -29,9 +32,7 @@ const EmptyContainer = styled.div`
     margin: 0 auto;  
 `;
 
-const EmptyText = styled.p.attrs({
-  className: 'empty-text',
-})`
+const EmptyText = styled.p`
    color: ${Theme.colors.red}; 
    text-align: center;
    vertical-align: middle;

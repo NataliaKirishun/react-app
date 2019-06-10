@@ -1,4 +1,4 @@
-import  {
+import {
   fetchMovies,
   fetchMovie,
   updateMovies,
@@ -15,15 +15,11 @@ import  {
   clearState,
 } from './actions';
 
-import  {
-  rootSaga
-} from './sagas';
+import rootSaga from './sagas';
 
-import {
-  rootReducer
-} from './reducers';
+import rootReducer from './reducers';
 
-export  {
+export {
   fetchMovies,
   fetchMovie,
   updateMovies,
@@ -40,9 +36,4 @@ export  {
   rootReducer,
   rootSaga,
   clearState,
-}
-
-
-
-
-
+};

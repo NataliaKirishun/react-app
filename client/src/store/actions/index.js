@@ -17,12 +17,12 @@ import {
 
 export const fetchMovies = (url) => ({
   type: FETCH_MOVIES,
-  url
+  url,
 });
 
 export const fetchMovie = (id) => ({
   type: FETCH_MOVIE,
-  id
+  id,
 });
 
 export const updateMovies = (movies, total) => ({
@@ -82,9 +82,3 @@ export const searchButtonHandler = () => ({
 export const clearState = () => ({
   type: CLEAR_STATE,
 });
-
-
-
-
-
-

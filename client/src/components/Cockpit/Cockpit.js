@@ -1,13 +1,22 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RadioButton from '../../common/Components/RadioButton/RadioButton';
 import Arrow from '../../common/Components/Arrow/Arrow';
 import Theme from '../../common/Theme/Theme';
 
-const Cockpit = ({
-  sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCount,
-}) => {
+type CockpitProps = {
+  sortBy: string,
+  sortOrder: string,
+  toggleSortBy: Function,
+  toggleSortDirection: Function,
+  filmsCount: number
+}
+
+const Cockpit = (props: CockpitProps) => {
+  const {
+    sortBy, sortOrder, toggleSortBy, toggleSortDirection, filmsCount,
+  } = props;
   return (
     <Background>
       <CockpitWrapper>
@@ -45,14 +54,6 @@ const Cockpit = ({
 };
 
 export default Cockpit;
-
-Cockpit.propTypes = {
-  sortBy: PropTypes.string,
-  sortOrder: PropTypes.string,
-  toggleSortBy: PropTypes.func,
-  toggleSortDirection: PropTypes.func,
-  filmsCount: PropTypes.number,
-};
 
 const Background = styled.div` 
     width: 100%;

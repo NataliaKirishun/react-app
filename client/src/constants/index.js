@@ -13,6 +13,6 @@ export const FETCH_MOVIE = 'FETCH_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const CLEAR_STATE = 'CLEAR_STATE';
 
-export function getUrl (searchBy, sortBy, sortOrder, term, offset, moviesPerPage) {
+export function getUrl(searchBy, sortBy, sortOrder, term, offset, moviesPerPage) {
   return `http://react-cdp-api.herokuapp.com/movies?searchBy=${searchBy}&sortBy=${sortBy}&sortOrder=${sortOrder}&search=${term}&offset=${offset}&limit=${moviesPerPage}`;
 }
